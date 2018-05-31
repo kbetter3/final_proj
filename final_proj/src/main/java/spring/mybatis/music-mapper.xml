@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.MusicDao">
+	<!-- Database 명령 작성 -->
+	
+	<insert id="insert" parameterType="map">
+		insert into music(no, name, albumNo, lyrics, releaseDate, genre, artistNo, thumb) values(
+		music_seq.nextval,
+		#{name},
+		#{albumNo},
+		#{lyrics},
+		to_date(#{releaseDate}, 'yyyy/mm/dd'),
+		#{genre},
+		#{artistNo},
+		#{thumb}
+		)
+	</insert>
+	
+	<select id="getList" resultType="musicDto">
+		select * from music
+	</select>
+	
+	<select id="getListOrderByReleaseDate" resultType="musicDto">
+		select * from music order by releaseDate asc
+	</select>
+	
+	<select id="getListByName" resultType="musicDto" parameterType="string">
+		select * from music where name like '%'||#{name}||'%'
+	</select>
+	
+	<select id="getListByAlbumNo" resultType="musicDto" parameterType="int">
+		select * from music where albumNo=#{albumNo}
+	</select>
+	
+	<select id="getListByGenre" resultType="musicDto" parameterType="string">
+		select * from music where genre=#{genre}
+	</select>
+	
+	<select id="getListByArtistNo" resultType="musicDto" parameterType="string">
+		select * from music where artistNo=#{artistNo}
+	</select>
+	
+	<select id="getByNo" resultType="musicDto" parameterType="int">
+		select * from music where no=#{no}
+	</select>
+</mapper>

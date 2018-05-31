@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.MemberDao">
+	<!-- Database 명령 작성 -->
+	
+	<insert id="insert" parameterType="map">
+		insert into member(no, id, pw, pwLoop, email, activationKey, regDate) values(
+		member_seq.nextval,
+		#{id},
+		#{pw},
+		#{pwLoop},
+		#{email},
+		#{activationKey},
+		sysdate
+		)
+	</insert>
+	
+	<select id="getList" resultType="memberDto">
+		select * from member
+	</select>
+	
+	<select id="getlistOrderById" resultType="memberDto">
+		select * from member order by id asc
+	</select>
+	
+	<select id="getListOrderByRegDate" resultType="memberDto">
+		select * from member order by regDate asc
+	</select>
+	
+	<select id="getListOrderByPower" resultType="memberDto">
+		select * from member order by power desc
+	</select>
+	
+	<select id="getListByPower" resultType="memberDto">
+		select * from member where power=#{power}
+	</select>
+	
+	<select id="getById" resultType="memberDto">
+		select * from member where id=#{id}
+	</select>
+</mapper>

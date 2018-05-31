@@ -11,8 +11,11 @@
 
 	<!-- 별칭: 마이바티스는 풀 패키지명을 이용해야 하는데 이를 축약할 수 있는 설정 -->
 	<typeAliases>
-		<typeAlias type="spring.bean.MenuDto" alias="menuDto"/>
-		<typeAlias type="spring.bean.TestDto" alias="testDto"/>
+		<typeAlias type="spring.bean.GenreDto" alias="genreDto"/>
+		<typeAlias type="spring.bean.ArtistDto" alias="artistDto"/>
+		<typeAlias type="spring.bean.AlbumDto" alias="albumDto"/>
+		<typeAlias type="spring.bean.MusicDto" alias="musicDto"/>
+		<typeAlias type="spring.bean.MemberDto" alias="memberDto"/>
 	</typeAliases>
 
 </configuration>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.AlbumDao">
+	<!-- Database 명령 작성 -->
+	
+	<insert id="insert" parameterType="map">
+		insert into Album(no, name, artistNo, releaseDate, genre, agency, thumb) values(
+		album_seq.nextval,
+		#{name},
+		#{artistNo},
+		to_date(#{releaseDate}, 'yyyy/mm/dd'),
+		#{genre},
+		#{agency},
+		#{thumb}
+		)
+	</insert>
+	
+	<select id="getList" resultType="albumDto">
+		select * from album
+	</select>
+	
+	<select id="getListByName" resultType="albumDto" parameterType="string">
+		select * from album where name like '%'||#{name}||'%'
+	</select>
+	
+	<select id="getListByArtistNo" resultType="albumDto" parameterType="int">
+		select * from album where artistNo=#{artistNo}
+	</select>
+	
+	<select id="getListByGenre" resultType="albumDto" parameterType="string">
+		select * from album where genre=#{genre}
+	</select>
+	
+	<select id="getByNo" resultType="albumDto" parameterType="int">
+		select * from album where no=#{no}
+	</select>
+</mapper>
