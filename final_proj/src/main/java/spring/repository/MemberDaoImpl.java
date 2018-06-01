@@ -27,6 +27,7 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("id", memberDto.getId());
 		map.put("pw", memberDto.getPw());
 		map.put("pwLoop", memberDto.getPwLoop());
+		map.put("salt", memberDto.getSalt());
 		map.put("email", memberDto.getEmail());
 		map.put("activationKey", memberDto.getActivationKey());
 		
@@ -63,5 +64,13 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("spring.repository.MemberDao.getById", id);
 	}
 	
-	
+	@Override
+	public MemberDto getByActivationKey(String activationKey) {
+		return sqlSession.selectOne("spring.repository.MemberDao.getByActivationKey", activationKey);
+	}
+
+	@Override
+	public void accountActivation(String activationKey) {
+		sqlSession.update("spring.repository.MemberDao.activation", activationKey);
+	}
 }

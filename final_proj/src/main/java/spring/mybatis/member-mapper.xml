@@ -6,14 +6,16 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into member(no, id, pw, pwLoop, email, activationKey, regDate) values(
+		insert into member(no, id, pw, pwLoop, salt, email, activationKey, regDate, power) values(
 		member_seq.nextval,
 		#{id},
 		#{pw},
 		#{pwLoop},
+		#{salt},
 		#{email},
 		#{activationKey},
-		sysdate
+		sysdate,
+		0
 		)
 	</insert>
 	
@@ -33,11 +35,19 @@
 		select * from member order by power desc
 	</select>
 	
-	<select id="getListByPower" resultType="memberDto">
+	<select id="getListByPower" resultType="memberDto" parameterType="int">
 		select * from member where power=#{power}
 	</select>
 	
-	<select id="getById" resultType="memberDto">
+	<select id="getById" resultType="memberDto" parameterType="string">
 		select * from member where id=#{id}
 	</select>
+	
+	<select id="getByActivationKey" resultType="memberDto" parameterType="string">
+		select * from member where activationKey=#{activationKey}
+	</select>
+	
+	<update id="activation" parameterType="string">
+		update member set power=1 where activationKey=#{activationKey}
+	</update>
 </mapper>

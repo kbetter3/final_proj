@@ -1,8 +1,11 @@
 package spring.test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.MessagingException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import spring.bean.AlbumDto;
 import spring.bean.ArtistDto;
 import spring.bean.GenreDto;
+import spring.bean.MemberDto;
 import spring.bean.MusicDto;
 import spring.service.AlbumService;
 import spring.service.ArtistService;
@@ -137,7 +141,12 @@ public class DBConnectionTest {
 	private MemberService memberService;
 	
 	@Test
-	public void MemberTest() {
+	public void MemberTest() throws NoSuchAlgorithmException, MessagingException {
+		MemberDto memberDto = new MemberDto();
+		memberDto.setId("test01");
+		memberDto.setPw("test");
+		memberDto.setEmail("kbetter3@naver.com");
 		
+		memberService.insert(memberDto);
 	}
 }

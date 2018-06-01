@@ -1,6 +1,9 @@
 package spring.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.stereotype.Service;
 
@@ -8,7 +11,7 @@ import spring.bean.MemberDto;
 
 @Service
 public interface MemberService {
-	public void insert(MemberDto memberDto);
+	public void insert(MemberDto memberDto) throws NoSuchAlgorithmException, MessagingException;
 	
 	public List<MemberDto> getList();
 	public List<MemberDto> getListOrderById();
@@ -18,4 +21,6 @@ public interface MemberService {
 	public List<MemberDto> getListByPower(int power);
 	
 	public MemberDto getById(String id);
+	
+	public boolean accountActivation(String activationKey);
 }

@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
-@PropertySource(value="file:src/main/webapp/WEB-INF/properties/db.properties")
+@PropertySource(value="classpath:db.properties")
 public class DatabaseConfig {
 	// DataSource, JdbcTemplate과 같은 Database 도구를 bean으로 정의
 	

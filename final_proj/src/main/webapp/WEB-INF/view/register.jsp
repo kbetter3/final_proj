@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>home.jsp</h2>
-	<a href="register">회원가입</a>
+	<h2>register.jsp</h2>
 </body>
 </html>
