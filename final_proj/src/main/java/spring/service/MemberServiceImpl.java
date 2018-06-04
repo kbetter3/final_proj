@@ -29,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private EmailService activationEmail; 
 	
+	@Transactional
 	@Override
 	public void insert(MemberDto memberDto) throws NoSuchAlgorithmException, MessagingException {
 		
@@ -39,9 +40,9 @@ public class MemberServiceImpl implements MemberService {
 		
 		log.debug("activationKey = {}, {}", memberDto.getSalt(), memberDto.getActivationKey());
 		
-		activationEmail.sendEmail(memberDto);
-		
 		memberDao.insert(memberDto);
+		
+		activationEmail.sendEmail(memberDto);
 	}
 
 	@Override
