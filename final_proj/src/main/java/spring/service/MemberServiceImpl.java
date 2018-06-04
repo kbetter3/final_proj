@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import spring.repository.MemberDao;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
+	
+	private Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private MemberDao memberDao;
@@ -31,7 +35,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDto.setSalt(UUID.randomUUID().toString());
 		memberDto.setPwLoop((int)(Math.random() * 9) + 1);
 		memberDto.setPw(sha256.encrypt(memberDto.getPw(), memberDto.getSalt(), memberDto.getPwLoop()));
-		memberDto.setActivationKey(sha256.encrypt(memberDto.getId(), memberDto.getSalt(), ((int)(Math.random() * 9 + 1))));
+		memberDto.setActivationKey(sha256.encrypt(memberDto.getId(), memberDto.getSalt(), 1));
+		
+		log.debug("activationKey = {}, {}", memberDto.getSalt(), memberDto.getActivationKey());
 		
 		activationEmail.sendEmail(memberDto);
 		

@@ -34,7 +34,6 @@ public class SHA256Service implements EncryptService {
 		
 		// 변환된 데이터를 받아보자(자리수 변경)
 		byte[] data = tool.digest();
-		log.debug("data.len = {}", data.length);
 		
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < data.length; i++) {
@@ -55,7 +54,6 @@ public class SHA256Service implements EncryptService {
 		
 		// 변환된 데이터를 받아보자(자리수 변경)
 		byte[] data = tool.digest();
-		log.debug("data.len = {}", data.length);
 		
 		StringBuffer buffer = new StringBuffer();
 		for (int i = 0; i < data.length; i++) {
