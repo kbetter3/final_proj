@@ -1,0 +1,38 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(250, 250, 250, 1);
+}
+
+.align-helper {
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.my-container {
+    width: 1060px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.h20 {
+    height: 20px;
+}
+
+.h45 {
+    height: 45px;
+}
+
+.h60 {
+    height: 60px;
+}
+
+.h62 {
+    height: 62px;
+}

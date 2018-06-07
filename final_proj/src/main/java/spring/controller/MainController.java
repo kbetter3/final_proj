@@ -45,6 +45,16 @@ public class MainController {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(method= {RequestMethod.GET}, value="/login")
+	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping(method= {RequestMethod.POST}, value="/login")
+	public String loginProc() {
+		return null;
+	}
+	
 	@RequestMapping(method= {RequestMethod.GET}, value="/activation")
 	public String Activation(@RequestParam String ak) {
 		boolean alreadyActivated = memberService.accountActivation(ak);
@@ -54,5 +64,10 @@ public class MainController {
 		} else {
 			return "activated";
 		}
+	}
+	
+	@RequestMapping(value="/enctest")
+	public String enctest() {
+		return "enctest";
 	}
 }
