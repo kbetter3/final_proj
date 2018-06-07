@@ -16,6 +16,7 @@
                 height: 100%;
                 vertical-align: middle;
             }
+
             body {
                 background-color: rgba(250, 250, 250, 1);
             }
@@ -79,6 +80,11 @@
                 width: 320px;
                 height: 60px;
                 right: 0;
+                outline: none;
+            }
+
+            .my-reg-input > input:focus {
+                outline: none;
             }
 
             .my-reg-input:nth-child(5n) {
@@ -133,6 +139,10 @@
                 font-size: 1.8em;
             }
 
+            .my-term > button:focus {
+                outline: none;
+            }
+
             .my-container > input[type=submit] {
                 border: none;
                 margin: 15px 0 40px 0;
@@ -140,6 +150,14 @@
                 color: white;
                 padding: 20px 90px;
                 font-size: 1.5em;
+            }
+
+            input.green-border {
+                border-color: rgba(0, 180, 35, 1);
+            }
+
+            input.red-border {
+                border: 1px solid red;
             }
         </style>
 
@@ -150,8 +168,23 @@
 
         <script>
             $(document).ready(function(){
-
+                $("#id").on("keyup", idCheck);
             });
+
+            function idCheck() {
+                var regex = /^[a-zA-Z0-9]{4,20}$/
+                var id = $(this).val();
+
+                if (regex.test(id)) {
+                    $(this).removeClass("red-border").addClass("green-border");
+                } else {
+                    $(this).removeClass("green-border").addClass("red-border");
+                }
+            }
+
+            function emailCheck() {
+
+            }
         </script>
     </head>
 
