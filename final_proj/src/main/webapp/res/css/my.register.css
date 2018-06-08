@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+.my-register-term-hr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.my-register-term-row {
+    height: 40px;
+}
+
+.my-register-term-row:first-child {
+    margin-bottom: 10px;
+}
+
+.my-register-term-row > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+input[type=checkbox], div.my-register-term-row > label {
+    margin: 0 1px 0 1px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.2);
+}
+
+.my-register-term-row > label {
+    font-size: 1.2em;
+}
+
+.my-register-term-option {
+    font-size: 0.8em;
+    margin-right: 4px;
+}
+
+button.glyphicon {
+    background-color: inherit;
+    border: none;
+    transform: scale(1.2);
+    opacity: 0.6;
+}
+
+.my-register-gray-option {
+    color: rgba(125, 125, 125, 1);
+}
+
+.my-register-green-option {
+    color: rgba(0, 180, 35, 1);
+}
+
+.my-register-term-content {
+    height: 80px;
+    overflow-y: scroll;
+    display: none;
+}
+
+button.my-register-regbtn {
+    margin: 30px 0 10px 0;
+    border: none;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: 400;
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#my-register-email-info {
+    width: 99%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: center;
+    font-size: 1.2em;
+}
+
+
+.my-register-info-row {
+    display: none;
+    height: 30px;
+    color: red;
+    text-align: center;
+}
+
+button.my-register-iddupchck, button.my-register-emaildupchck {
+    padding: 0 10px 0 10px;
+    
+    display: inline-block;
+    border: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: inherit;
+    height: 58px;
+    position: absolute;
+    top: 1px;
+    right: 0;
+}
+
+#my-register-id, #my-register-email {
+    padding: 0 90px 0 20px;
+}

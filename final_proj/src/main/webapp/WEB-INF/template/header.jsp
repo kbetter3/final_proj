@@ -3,6 +3,7 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="rootPath" value="${pageContext.request.contextPath }"></c:set>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +18,7 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.header.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.member.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.login.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.register.css">
 
         <style>
         /* style */
@@ -27,11 +29,12 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         
-        <script src="${rootPath}/res/js/encrypt.js"></script>
+        <script src="${rootPath}/res/js/my.encrypt.js"></script>
+        <script src="${rootPath}/res/js/my.login.js"></script>
+        <script src="${rootPath}/res/js/my.register.js"></script>
         
         <script>
             $(document).ready(function(){
-
             });
         </script>
     </head>
@@ -44,7 +47,7 @@
                     <div class="my-header-nav-wrap">
                         <div class="my-header-nav-item-wrap my-header-nav-item-left">
                             <div class="align-helper h45"></div>
-                            <a class="my-header-nav-item" href="#">HOME</a>
+                            <a class="my-header-nav-item" href="${rootPath}/home">HOME</a>
                             <div class="my-header-nav-item glyphicon glyphicon-time
  my-header-glyphicon">2018-01-28</div>
                             <div class="my-header-nav-item 	glyphicon glyphicon-download-alt">30</div>
@@ -61,8 +64,8 @@
 
                         <div class="my-header-nav-item-wrap my-header-nav-item-right">
                             <div class="align-helper h45"></div>
-                            <a class="my-header-nav-item" href="#">로그인</a>
-                            <a class="my-header-nav-item" href="/register">회원가입</a>
+                            <a class="my-header-nav-item" href="${rootPath}/login">로그인</a>
+                            <a class="my-header-nav-item" href="${rootPath}/register">회원가입</a>
                         </div>
                     </div>
                 </div>

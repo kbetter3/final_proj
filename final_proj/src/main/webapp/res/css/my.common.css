@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 * {
     margin: 0;
     padding: 0;
@@ -23,6 +24,10 @@ body {
 
 .h20 {
     height: 20px;
+}
+
+.h40 {
+    height: 40px;
 }
 
 .h45 {

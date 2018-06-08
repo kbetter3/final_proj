@@ -1,10 +1,15 @@
 @charset "UTF-8";
+
 .my-member-container {
     width: 550px;
     margin: 0 auto;
     padding: 20px 50px;
     border: 1px solid rgb(0, 0, 0, 0.13);
     background-color: white;
+}
+
+.my-member-container:nth-child(2n-1) {
+    margin-top: -1px;
 }
 
 .my-member-row {
@@ -41,4 +46,30 @@
 
 .my-member-row-right {
     right: 0;
+}
+
+input.my-member-green-border {
+    border: 1px solid rgba(0, 180, 35, 1);
+}
+
+input.my-member-red-border {
+    border: 1px solid red;
+}
+
+input.my-member-gray-border {
+    border: 1px solid rgba(0, 0, 0, 0.26);
+}
+
+.my-member-title {
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.my-member-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.my-member-logo a:link, .my-member-logo a:visited, .my-member-logo:hover {
+    text-decoration: none;
 }
