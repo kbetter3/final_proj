@@ -18,6 +18,7 @@ public interface MemberDao {
 	public List<MemberDto> getListByPower(int power);
 	
 	public MemberDto getById(String id);
+	public MemberDto getByEmail(String email);
 	public MemberDto getByActivationKey(String activationKey);
 	
 	public void accountActivation(String activationKey);

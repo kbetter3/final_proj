@@ -74,6 +74,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto getById(String id) {
 		return memberDao.getById(id);
 	}
+	
+	@Override
+	public MemberDto getByEmail(String email) {
+		return memberDao.getByEmail(email);
+	}
 
 	@Override
 	public boolean accountActivation(String activationKey) {

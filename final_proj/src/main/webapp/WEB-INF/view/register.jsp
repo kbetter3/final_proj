@@ -48,7 +48,7 @@
 
                     <div class="my-member-row">
                         <span class="align-helper h60"></span>
-                        <span class="my-register-info" id="my-register-email-info">이메일 인증 후 가입이 완료됩니다.</span>
+                        <span class="my-register-info" id="my-register-email-label">이메일 인증 후 가입이 완료됩니다.</span>
                     </div>
 
                     <div class="my-member-row">
@@ -62,6 +62,7 @@
                             <button type="button" class="my-register-emaildupchck">중복검사</button>
                         </div>
                     </div>
+                    <div class="my-register-info-row" id="my-register-email-info"></div>
                 </form>
             </div>
             <div class="my-member-container">
@@ -116,5 +117,8 @@
             $(document).ready(function(){
                 $(".my-register-iddupchck").on("click", register_idCheck);
                 $("#my-register-id").on("keydown", register_resetIdValidation);
+                $("input[type=password]").on("keyup", register_pwCheck);
+                $(".my-register-emaildupchck").on("click", register_emailCheck);
+                $("#my-register-email").on("keydown", register_resetEmailValidation);
             });
         </script>

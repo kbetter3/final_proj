@@ -21,6 +21,7 @@ public interface MemberService {
 	public List<MemberDto> getListByPower(int power);
 	
 	public MemberDto getById(String id);
+	public MemberDto getByEmail(String email);
 	
 	public boolean accountActivation(String activationKey);
 }

@@ -82,4 +82,18 @@ public class MemberController {
 			log.debug("{}", memberDto);
 		}
 	}
+	
+	@RequestMapping(value="/emaildupcheck")
+	@ResponseBody
+	public void emailDupCheck(String email, HttpServletResponse response) throws IOException {
+		MemberDto memberDto = memberService.getByEmail(email);
+		
+		if (memberDto == null) {
+			log.debug("memberDto is null");
+		} else {
+			PrintWriter out = response.getWriter();
+			out.println(memberDto.getEmail());
+			log.debug("{}", memberDto);
+		}
+	}
 }

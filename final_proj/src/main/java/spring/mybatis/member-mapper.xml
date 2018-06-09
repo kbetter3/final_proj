@@ -43,6 +43,10 @@
 		select * from member where id=#{id}
 	</select>
 	
+	<select id="getByEmail" resultType="memberDto" parameterType="String">
+		select * from member where email=#{email}
+	</select>
+	
 	<select id="getByActivationKey" resultType="memberDto" parameterType="string">
 		select * from member where activationKey=#{activationKey}
 	</select>

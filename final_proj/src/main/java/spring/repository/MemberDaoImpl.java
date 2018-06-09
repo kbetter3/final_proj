@@ -65,6 +65,11 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
+	public MemberDto getByEmail(String email) {
+		return sqlSession.selectOne("spring.repository.MemberDao.getByEmail", email);
+	}
+	
+	@Override
 	public MemberDto getByActivationKey(String activationKey) {
 		return sqlSession.selectOne("spring.repository.MemberDao.getByActivationKey", activationKey);
 	}
