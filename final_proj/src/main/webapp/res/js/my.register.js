@@ -5,6 +5,7 @@
 var register_idValidCheck = false;
 var register_pwValidCheck = false;
 var register_emailValidCheck = false;
+var register_termValidCheck = false;
 
 var register_idDupCheck = false;
 
@@ -167,4 +168,79 @@ function register_emailDuplicationCheckSuccess(data) {
 function register_resetEmailValidation() {
 	register_emailValidCheck = false;
 	$("#my-register-email").removeClass("my-member-green-border");
+}
+
+function register_termCheck() {
+    var terms = $(".my-register-term-checkbox");
+    
+    register_termValidCheck = false;
+    register_termAgreementCheck();
+    
+    for (var i = 0; i < terms.length; i++) {
+        if (!terms.eq(i).prop("checked")) {
+            $("#my-register-term-all").prop("checked", false);
+            return;
+        }
+    }
+    
+    $("#my-register-term-all").prop("checked", true);
+}
+
+function register_termAllCheck() {
+    $(".my-register-term-checkbox").prop("checked", $(this).prop("checked"));
+}
+
+function register_termAgreementCheck() {
+    var required_term = $(".my-register-term-required");
+    
+    for (var i = 0; i < required_term.length; i++) {
+        if (!required_term.eq(i).prop("checked")) {
+            $("#my-register-term-info").show();
+            register_termValidCheck = false;
+            return;
+        }
+    }
+    
+    $("#my-register-term-info").hide();
+    register_termValidCheck = true;
+}
+
+function register_doRegister() {
+    var submit = true;
+    
+    if (!register_idDupCheck || !register_idValidCheck) {
+        $("#my-register-id").addClass("my-member-red-border");
+        submit = false;
+    }
+    
+    if (!register_pwValidCheck) {
+        $("input[type=password]").addClass("my-member-red-border");
+        submit = false;
+    }
+    
+    if (!register_emailValidCheck) {
+        $("#my-register-email").addClass("my-member-red-border");
+        submit = false;
+    }
+    
+    register_termAgreementCheck();
+    if (!register_termValidCheck) {
+        submit = false;
+    }
+
+    if (submit) {
+        $("#register-form").submit();
+    }
+}
+
+function register_clipTerm() {
+    var term_content = $(this).parent().next(".my-register-term-content");
+    
+    if ($(this).hasClass("glyphicon-chevron-down")) {
+        $(this).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
+        term_content.show();
+    } else {
+        $(this).removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+        term_content.hide();
+    }
 }
