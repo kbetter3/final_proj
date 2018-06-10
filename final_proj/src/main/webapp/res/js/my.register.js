@@ -159,9 +159,10 @@ function register_emailDuplicationCheckSuccess(data) {
     if (data) {
         email_input.addClass("my-member-red-border");
         $("#my-register-email-info").text("이미 사용중인 이메일 입니다.").show();
-        register_emailValidCheck = true;
+        register_emailValidCheck = false;
     } else {
         email_input.addClass("my-member-green-border");
+        register_emailValidCheck = true;
     }
 }
 
@@ -174,7 +175,7 @@ function register_termCheck() {
     var terms = $(".my-register-term-checkbox");
     
     register_termValidCheck = false;
-    register_termAgreementCheck();
+    register_termAgreementInfoHide();
     
     for (var i = 0; i < terms.length; i++) {
         if (!terms.eq(i).prop("checked")) {
@@ -188,6 +189,7 @@ function register_termCheck() {
 
 function register_termAllCheck() {
     $(".my-register-term-checkbox").prop("checked", $(this).prop("checked"));
+    register_termAgreementInfoHide();
 }
 
 function register_termAgreementCheck() {
@@ -203,6 +205,23 @@ function register_termAgreementCheck() {
     
     $("#my-register-term-info").hide();
     register_termValidCheck = true;
+}
+
+function register_termAgreementInfoHide() {
+	var required_term = $(".my-register-term-required");
+	var hideInfo = true;
+	
+	for (var i = 0; i < required_term.length; i++) {
+		if (!required_term.eq(i).prop("checked")) {
+			hideInfo = false;
+			break;
+		}
+	}
+	
+	if (hideInfo) {
+		$("#my-register-term-info").hide();
+		register_termValidCheck = true;
+	}
 }
 
 function register_doRegister() {
@@ -229,6 +248,7 @@ function register_doRegister() {
     }
 
     if (submit) {
+    	register_encpw();
         $("#register-form").submit();
     }
 }
@@ -243,4 +263,12 @@ function register_clipTerm() {
         $(this).removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
         term_content.hide();
     }
+}
+
+function register_encpw() {
+    var pw = $("#my-register-pw");
+    var encpw = SHA256(pw.val());
+    pw.val(encpw);
+    console.log(encpw);
+    $("#my-register-pwchck").val("");
 }

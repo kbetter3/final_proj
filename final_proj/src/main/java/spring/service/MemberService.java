@@ -22,6 +22,7 @@ public interface MemberService {
 	
 	public MemberDto getById(String id);
 	public MemberDto getByEmail(String email);
+	public MemberDto login(String id, String pw) throws NoSuchAlgorithmException;
 	
 	public boolean accountActivation(String activationKey);
 }

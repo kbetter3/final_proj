@@ -79,6 +79,17 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto getByEmail(String email) {
 		return memberDao.getByEmail(email);
 	}
+	
+	@Override
+	public MemberDto login(String id, String pw) throws NoSuchAlgorithmException {
+		MemberDto memberDto = memberDao.getById(id);
+		
+		if (memberDto.getPw().equals(sha256.encrypt(pw, memberDto.getSalt(), memberDto.getPwLoop()))) {
+			return memberDto;
+		} else {
+			return null;
+		}
+	}
 
 	@Override
 	public boolean accountActivation(String activationKey) {

@@ -75,26 +75,26 @@
                 <div class="my-register-term-hr"></div>
                 <div class="my-register-term-row">
                     <div class="align-helepr h40"></div>
-                    <input type="checkbox" class="my-register-term-checkbox" id="my-register-term-1">
+                    <input type="checkbox" class="my-register-term-checkbox my-register-term-required" id="my-register-term-1">
                     <label for="my-register-term-1">이용약관</label>
                     <span class="my-register-term-option my-register-green-option">(필수)</span>
-                    <button type="button" class="glyphicon glyphicon-chevron-down"></button>
+                    <button type="button" class="glyphicon glyphicon-chevron-down my-register-term-clip"></button>
                 </div>
                 <div class="my-register-term-content" id="my-register-content-1">abc</div>
                 <div class="my-register-term-row">
                     <div class="align-helper h40"></div>
-                    <input type="checkbox" class="my-register-term-checkbox" id="my-register-term-2">
+                    <input type="checkbox" class="my-register-term-checkbox my-register-term-required" id="my-register-term-2">
                     <label for="my-register-term-2">유료서비스약관</label>
                     <span class="my-register-term-option my-register-green-option">(필수)</span>
-                    <button type="button" class="glyphicon glyphicon-chevron-down"></button>
+                    <button type="button" class="glyphicon glyphicon-chevron-down my-register-term-clip"></button>
                 </div>
                 <div class="my-register-term-content" id="my-register-content-2">abc</div>
                 <div class="my-register-term-row">
                     <div class="align-helper h40"></div>
-                    <input type="checkbox" class="my-register-term-checkbox" id="my-register-term-3">
+                    <input type="checkbox" class="my-register-term-checkbox my-register-term-required" id="my-register-term-3">
                     <label for="my-register-term-3">개인정보 수집 및 이용</label>
                     <span class="my-register-term-option my-register-green-option">(필수)</span>
-                    <button type="button" class="glyphicon glyphicon-chevron-down"></button>
+                    <button type="button" class="glyphicon glyphicon-chevron-down my-register-term-clip"></button>
                 </div>
                 <div class="my-register-term-content" id="my-register-content-3">abc</div>
                 <div class="my-register-term-row">
@@ -102,11 +102,11 @@
                     <input type="checkbox" class="my-register-term-checkbox" id="my-register-term-4">
                     <label for="my-register-term-4">이벤트, 서비스안내 수신</label>
                     <span class="my-register-term-option my-register-gray-option">(선택)</span>
-                    <button type="button" class="glyphicon glyphicon-chevron-down"></button>
+                    <button type="button" class="glyphicon glyphicon-chevron-down my-register-term-clip"></button>
                 </div>
                 <div class="my-register-term-content" id="my-register-content-4">abc</div>
                 
-                <div class="my-register-info-row" id="my-register-term-info"></div>
+                <div class="my-register-info-row" id="my-register-term-info">약관에 동의하여야 합니다.</div>
 
                 <button type="button" class="my-register-regbtn">
                     <div class="align-helper h60"></div>

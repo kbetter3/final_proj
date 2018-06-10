@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(method= {RequestMethod.POST}, value="/register")
+	@Transactional
 	public String doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
 		MemberDto memberDto = new MemberDto();
 		memberDto.setId(id);
@@ -49,8 +51,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping(method= {RequestMethod.POST}, value="/login")
-	public String loginProc() {
-		return null;
+	public String doLogin(@RequestParam String id, @RequestParam String pw) throws NoSuchAlgorithmException {
+		MemberDto memberDto = memberService.login(id, pw);
+		
+		if (memberDto != null) {
+			log.debug("success - {}", memberDto.getId());
+		} else {
+			log.debug("fail to login");
+		}
+		
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/activation")
