@@ -16,6 +16,10 @@ body {
     vertical-align: middle;
 }
 
+.my-wrap {
+	positon: relative;
+}
+
 .my-container {
     width: 1060px;
     margin: 0 auto;

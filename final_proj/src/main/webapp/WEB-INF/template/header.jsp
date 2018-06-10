@@ -40,6 +40,7 @@
     </head>
 
     <body>
+    	<div class="my-wrap">
         <div class="my-header-wrap">
             <div class="my-header-top-deco"></div>
             <div class="my-header-nav">
