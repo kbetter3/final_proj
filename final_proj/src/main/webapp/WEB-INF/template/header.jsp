@@ -29,6 +29,8 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         
+        <script src="${rootPath}/res/js/jplayer/jquery.jplayer.min.js"></script>
+        
         <script src="${rootPath}/res/js/my.encrypt.js"></script>
         <script src="${rootPath}/res/js/my.login.js"></script>
         <script src="${rootPath}/res/js/my.register.js"></script>
@@ -40,7 +42,6 @@
     </head>
 
     <body>
-    	<div class="my-wrap">
         <div class="my-header-wrap">
             <div class="my-header-top-deco"></div>
             <div class="my-header-nav">

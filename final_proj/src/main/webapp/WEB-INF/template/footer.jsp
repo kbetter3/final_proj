@@ -11,6 +11,5 @@ iPad
 문의전화(평일 09:00~18:00) : 1566-7727 (유료)이메일 : meloninformation@kakao-m.com호스팅 제공자 : (주) 카카오 M© Kakao M Corp.All rights reserved.
         </div>
         	<div style="min-width: 1060px; width: 100%; position: absolute; bottom: 0; background-color: rgba(0, 0, 0, 0.5);">player</div>
-        </div>
     </body>
 </html>
