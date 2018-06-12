@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class MemberController {
 		
 		memberService.insert(memberDto);
 		
-		return "redirect:/home";
+		return "redirect:/chart";
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/login")
@@ -51,16 +52,29 @@ public class MemberController {
 	}
 	
 	@RequestMapping(method= {RequestMethod.POST}, value="/login")
-	public String doLogin(@RequestParam String id, @RequestParam String pw) throws NoSuchAlgorithmException {
+	public String doLogin(@RequestParam String id, @RequestParam String pw, HttpSession session) throws NoSuchAlgorithmException {
 		MemberDto memberDto = memberService.login(id, pw);
 		
+		String returnUrl = "";
+		
 		if (memberDto != null) {
+			// 이메일 미인증 회원 처리해야함
+			session.setAttribute("uid", memberDto.getId());
 			log.debug("success - {}", memberDto.getId());
+			returnUrl = "redirect:/chart";
 		} else {
 			log.debug("fail to login");
+			returnUrl = "redirect:/login";
 		}
 		
-		return "redirect:/home";
+		return returnUrl;
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET}, value="/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("uid");
+		
+		return "redirect:/chart";
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/activation")
