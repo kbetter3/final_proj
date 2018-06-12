@@ -1,5 +1,7 @@
 package spring.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,10 @@ public class MainController {
 
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping(method= {RequestMethod.GET}, value="/home")
-	public String home() {
-		return "home";
+	@RequestMapping(method= {RequestMethod.GET}, value="/chart")
+	public String chart(HttpServletRequest request) {
+//		request.setAttribute("rootPath", request.getContextPath());
+		return "chart";
 	}
 	
 	

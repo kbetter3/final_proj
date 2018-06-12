@@ -21,6 +21,7 @@ public class Utf8Filter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)arg0;
 		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("rootPath", request.getContextPath());
 		
 		arg2.doFilter(arg0, arg1);
 	}

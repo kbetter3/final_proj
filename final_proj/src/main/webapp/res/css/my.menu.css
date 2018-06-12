@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+li.my-menu-menuitem {
+    padding: 0 30px 10px 30px;
+    display: inline-block;
+    font-size: 1.4em;
+}
+
+li.my-menu-menuitem:hover {
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+}
+
+li.my-menu-menuitem > a, li.my-menu-menuitem > a:visited, li.my-menu-menuitem > a:hover {
+	text-decoration: none;
+}
+
+li.my-menu-menuitem > a, li.my-menu-menuitem > a:visited {
+	color: rgba(0, 0, 0, 0.4);
+}
+
+li.my-menu-menuitem > a:hover {
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.my-menu-wrap {
+    padding-top: 30px;
+    height: 60px;
+    width: 100%;
+    position: relative;
+}
+
+.my-menu-wrap > ul {
+    list-style: none;
+    position: absolute;
+}
+
+.my-menu-left {
+    left: 0;
+}
+
+.my-menu-right {
+    right: 0;
+}

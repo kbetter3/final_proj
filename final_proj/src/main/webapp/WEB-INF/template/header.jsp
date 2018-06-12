@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<c:set var="rootPath" value="${pageContext.request.contextPath }"></c:set>
+
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,10 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.member.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.login.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.register.css">
+        
+        <link rel="stylesheet" href="${rootPath}/res/css/my.menu.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.submenu.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.chart.css">
 
         <style>
         /* style */

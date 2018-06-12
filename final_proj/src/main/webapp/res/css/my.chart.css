@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.my-chart-contents-wrap {
+    width: 100%;
+}
+
+.my-chart-title-wrap {
+    height: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#my-chart-title-cb {
+    width: 15px;
+}
+
+#my-chart-title-no, .my-chart-no {
+    padding-right: 5px;
+    text-align: center;
+    width: 65px;
+}
+
+#my-chart-title-thumb {
+    width: 60px;
+}
+
+#my-chart-title-musicinfo, .my-chart-musicinfo {
+    padding-left: 12px;
+    width: 340px;
+}
+
+#my-chart-title-album, .my-chart-album {
+    padding-left: 12px;
+    width: 280px;
+}
+
+#my-chart-title-like {
+    padding-left: 36px;
+    width: 135px;
+}
+
+.my-chart-like {
+    padding-left: 18px;
+}
+
+#my-chart-title-listen, #my-chart-title-add, #my-chart-title-down, .my-chart-listen, .my-chart-add, .my-chart-down {
+    text-align: center;
+    width: 55px;
+}
+
+.my-chart-music-row {
+    height: 85px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.my-chart-likebtn, .my-chart-listenbtn, .my-chart-addbtn, .my-chart-downbtn {
+    border: none;
+    background-color: inherit;
+}

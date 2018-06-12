@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.my-submenu-wrap {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.my-submenu-container {
+    font-size: 0;
+    list-style: none;
+}
+
+.my-submenu-menuitem-2 {
+    text-align: center;
+    font-size: 14px;
+    width: 50%;
+    display: inline-block;
+    padding: 14px 0;
+}
+
+
+.my-submenu-menuitem-3 {
+    text-align: center;
+    font-size: 14px;
+    width: 33.33%;
+    display: inline-block;
+    padding: 14px 0;
+}
+
+.my-submenu-menuitem-4 {
+    text-align: center;
+    font-size: 14px;
+    width: 25%;
+    display: inline-block;
+    padding: 14px 0;
+}
+
+.my-submenu-container > li {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.my-submenu-menulink, .my-submenu-menulink:visited, .my-submenu-menulink:hover {
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+}
+
+li.my-submenu-selected {
+    background-color: white;
+}
+
+a.my-submenu-selected, a.my-submenu-selected:visited, a.my-submenu-selected:hover {
+    text-decoration: none;
+    color: rebeccapurple;
+}
