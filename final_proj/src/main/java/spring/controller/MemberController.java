@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -47,24 +48,37 @@ public class MemberController {
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/login")
-	public String login() {
-		return "login";
+	public String login(HttpSession session) {
+		String returnUrl;
+		
+		if (session.getAttribute("uid") != null) {
+			returnUrl = "redirect:/chart"; 
+		} else {
+			returnUrl = "login";
+		}
+		
+		return returnUrl;
 	}
 	
 	@RequestMapping(method= {RequestMethod.POST}, value="/login")
-	public String doLogin(@RequestParam String id, @RequestParam String pw, HttpSession session) throws NoSuchAlgorithmException {
+	public String doLogin(@RequestParam String id, @RequestParam String pw, HttpSession session, HttpServletRequest request) throws NoSuchAlgorithmException {
 		MemberDto memberDto = memberService.login(id, pw);
 		
 		String returnUrl = "";
 		
 		if (memberDto != null) {
-			// 이메일 미인증 회원 처리해야함
-			session.setAttribute("uid", memberDto.getId());
-			log.debug("success - {}", memberDto.getId());
-			returnUrl = "redirect:/chart";
+			if (memberDto.getPower() == 0) {
+				// 이메일 미인증계정 처리
+				request.setAttribute("error", "이메일 인증을 완료해 주세요.");
+				returnUrl = "login";
+			} else {
+				// 이메일 인증계정 로그인 처리
+				session.setAttribute("uid", memberDto.getId());
+				returnUrl = "redirect:/chart";
+			}
 		} else {
-			log.debug("fail to login");
-			returnUrl = "redirect:/login";
+			request.setAttribute("error", "로그인 정보가 올바르지 않습니다.");
+			returnUrl = "login";
 		}
 		
 		return returnUrl;

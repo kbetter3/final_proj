@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -53,10 +53,12 @@
                         <div class="my-header-nav-item-wrap my-header-nav-item-left">
                             <div class="align-helper h45"></div>
                             <a class="my-header-nav-item" href="${rootPath}/home">HOME</a>
+                            <c:if test="${sessionScope.uid != null }">
                             <div class="my-header-nav-item glyphicon glyphicon-time
  my-header-glyphicon">2018-01-28</div>
                             <div class="my-header-nav-item 	glyphicon glyphicon-download-alt">30</div>
                             <a class="my-header-nav-item" href="#">이용권 구매</a>
+                            </c:if>
                         </div>
 
                         <div class="align-helper h45"></div>
@@ -69,8 +71,15 @@
 
                         <div class="my-header-nav-item-wrap my-header-nav-item-right">
                             <div class="align-helper h45"></div>
+                            <c:choose>
+                            <c:when test="${empty sessionScope.uid}">
                             <a class="my-header-nav-item" href="${rootPath}/login">로그인</a>
                             <a class="my-header-nav-item" href="${rootPath}/register">회원가입</a>
+                            </c:when>
+                            <c:otherwise>
+                            <a class="my-header-nav-item" href="${rootPath}/logout">로그아웃</a>
+                            </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
