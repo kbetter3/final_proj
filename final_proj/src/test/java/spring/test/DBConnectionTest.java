@@ -143,9 +143,9 @@ public class DBConnectionTest {
 	@Test
 	public void MemberTest() throws NoSuchAlgorithmException, MessagingException {
 		MemberDto memberDto = new MemberDto();
-		memberDto.setId("test01");
+		memberDto.setId("test02");
 		memberDto.setPw("test");
-		memberDto.setEmail("kbetter3@naver.com");
+		memberDto.setEmail("kbetter33@naver.com");
 		
 		memberService.insert(memberDto);
 	}

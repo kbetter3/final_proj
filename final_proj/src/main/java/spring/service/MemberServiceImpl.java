@@ -84,6 +84,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto login(String id, String pw) throws NoSuchAlgorithmException {
 		MemberDto memberDto = memberDao.getById(id);
 		
+		if (memberDto == null) {
+			return null;
+		}
+		
 		if (memberDto.getPw().equals(sha256.encrypt(pw, memberDto.getSalt(), memberDto.getPwLoop()))) {
 			return memberDto;
 		} else {

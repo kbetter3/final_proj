@@ -59,6 +59,7 @@
                     </div>
                 </div>
                 </form>
+                <div class="my-login-errormsg">${error}</div>
             </div>
         </div>
 

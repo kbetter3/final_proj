@@ -74,6 +74,7 @@ public class MemberController {
 			} else {
 				// 이메일 인증계정 로그인 처리
 				session.setAttribute("uid", memberDto.getId());
+				session.setAttribute("upower", memberDto.getPower());
 				returnUrl = "redirect:/chart";
 			}
 		} else {
@@ -86,7 +87,7 @@ public class MemberController {
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("uid");
+		session.invalidate();
 		
 		return "redirect:/chart";
 	}
@@ -134,4 +135,5 @@ public class MemberController {
 			log.debug("{}", memberDto);
 		}
 	}
+	
 }

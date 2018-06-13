@@ -14,8 +14,12 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/**"/>
+			<mvc:mapping path="/member/**"/>
 			<bean class="spring.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/uploader/**"/>
+			<bean class="spring.interceptor.UploaderInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

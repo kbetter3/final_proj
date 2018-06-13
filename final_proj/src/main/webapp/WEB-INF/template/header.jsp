@@ -77,6 +77,11 @@
                             <a class="my-header-nav-item" href="${rootPath}/register">회원가입</a>
                             </c:when>
                             <c:otherwise>
+                            <c:if test="${sessionScope.upower == 2}">
+                            	<a class="my-header-nav-item" href="${rootPath}/uploader/config">업로드</a>
+                            </c:if>
+                            
+                            <a class="my-header-nav-item" href="${rootPath}/member/info">${sessionScope.uid}</a>
                             <a class="my-header-nav-item" href="${rootPath}/logout">로그아웃</a>
                             </c:otherwise>
                             </c:choose>
