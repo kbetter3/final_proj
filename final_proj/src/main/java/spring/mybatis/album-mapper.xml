@@ -6,14 +6,16 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into Album(no, name, artistNo, releaseDate, genre, agency, thumb) values(
+		insert into Album(no, name, artistNo, releaseDate, genre, agency, thumb, regDate, mId) values(
 		album_seq.nextval,
 		#{name},
 		#{artistNo},
 		to_date(#{releaseDate}, 'yyyy/mm/dd'),
 		#{genre},
 		#{agency},
-		#{thumb}
+		#{thumb},
+		sysdate,
+		#{mid}
 		)
 	</insert>
 	

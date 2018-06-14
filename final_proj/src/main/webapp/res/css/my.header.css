@@ -13,7 +13,6 @@
     height: 46px;
     background-color: white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
 .my-header-nav-wrap {
@@ -43,7 +42,7 @@
 }
 
 .my-header-nav-item-left > .my-header-nav-item {
-    margin-right: 15px;
+    margin: 0 9px;
 }
 
 .my-header-nav-item-right {
@@ -81,6 +80,11 @@ span.glyphicon-search {
     margin-left: -28px;
 }
 
+
+.my-header-menu {
+
+}
+
 .my-header-menu-wrap {
     position: relative;
     height: 60px;
@@ -110,6 +114,18 @@ a.my-header-menu-link:link, a.my-header-menu-link:visited, a.my-header-menu-link
     text-decoration: none;
 }
 
-a.my-header-menu-link:visited {
-    color: black;
+#my-header-voucher {
+    display: inline-block;
+    text-align: left;
+    width: 72px;
+}
+
+#my-header-downcont {
+    display: inline-block;
+    text-align: left;
+    width: 15px;
+}
+
+.my-header-cursor {
+    cursor: pointer;
 }

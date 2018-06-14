@@ -12,4 +12,6 @@ public class AlbumDto {
 	private String agency;
 	private String thumb;
 	private int likeCount;
+	private String regDate;
+	private String mId;
 }

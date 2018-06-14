@@ -37,59 +37,51 @@
         <script src="${rootPath}/res/js/my.encrypt.js"></script>
         <script src="${rootPath}/res/js/my.login.js"></script>
         <script src="${rootPath}/res/js/my.register.js"></script>
+        <script src="${rootPath}/res/js/my.header.js"></script>
         
-        <script>
-            $(document).ready(function(){
-            });
-        </script>
     </head>
 
     <body>
-        <div class="my-header-wrap">
+		<div class="my-header-wrap">
             <div class="my-header-top-deco"></div>
             <div class="my-header-nav">
                 <div class="my-container">
                     <div class="my-header-nav-wrap">
                         <div class="my-header-nav-item-wrap my-header-nav-item-left">
                             <div class="align-helper h45"></div>
-                            <a class="my-header-nav-item" href="${rootPath}/home">HOME</a>
-                            <c:if test="${sessionScope.uid != null }">
-                            <div class="my-header-nav-item glyphicon glyphicon-time
- my-header-glyphicon">2018-01-28</div>
-                            <div class="my-header-nav-item 	glyphicon glyphicon-download-alt">30</div>
-                            <a class="my-header-nav-item" href="#">이용권 구매</a>
-                            </c:if>
+                            <div class="my-header-nav-item my-header-cursor" id="my-header-homebtn">HOME</div>
+                            <div class="my-header-nav-item">
+                                <span class="glyphicon glyphicon-time
+     my-header-glyphicon"></span>
+                                <span id="my-header-voucher">-/-</span>
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                                <span id="my-header-downcnt">-/-</span>
+                            </div>
+                            <div class="my-header-nav-item my-header-cursor" id="my-header-voucherbtn">이용권 구매</div>
                         </div>
 
                         <div class="align-helper h45"></div>
                         <div class="my-header-nav-item-center">
                             <input type="search" class="my-header-nav-search" placeholder="Search...">
-                            <a class="my-header-nav-item" href="#">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </a>
+                            <span class="glyphicon glyphicon-search my-header-cursor" id="my-header-searchbtn"></span>
                         </div>
 
-                        <div class="my-header-nav-item-wrap my-header-nav-item-right">
+                        <div class="my-header-nav-item-wrap my-header-nav-item-right" id="my-header-right-container">
                             <div class="align-helper h45"></div>
-                            <c:choose>
-                            <c:when test="${empty sessionScope.uid}">
-                            <a class="my-header-nav-item" href="${rootPath}/login">로그인</a>
-                            <a class="my-header-nav-item" href="${rootPath}/register">회원가입</a>
-                            </c:when>
-                            <c:otherwise>
-                            <c:if test="${sessionScope.upower == 2}">
-                            	<a class="my-header-nav-item" href="${rootPath}/uploader/config">업로드</a>
-                            </c:if>
-                            
-                            <a class="my-header-nav-item" href="${rootPath}/member/info">${sessionScope.uid}</a>
-                            <a class="my-header-nav-item" href="${rootPath}/logout">로그아웃</a>
-                            </c:otherwise>
-                            </c:choose>
+                            <div class="my-header-nav-item my-header-cursor" id="my-header-loginbtn">로그인</div>
+                            <div class="my-header-nav-item my-header-cursor" id="my-header-regbtn">회원가입</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <script>
+            $(document).ready(function(){
+                $("#my-header-homebtn").on("click", my_header_home);
+            });
+        </script>
+<!--         
     </body>
 </html>
-        
+-->

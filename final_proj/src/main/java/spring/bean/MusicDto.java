@@ -16,4 +16,6 @@ public class MusicDto {
 	private int playCount;
 	private int downCount;
 	private String thumb;
+	private String regDate;
+	private String mId;
 }

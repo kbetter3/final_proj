@@ -27,6 +27,7 @@ public class ArtistDaoImpl implements ArtistDao {
 		map.put("member", artistDto.getMember());
 		map.put("debutDate", artistDto.getDebutDate());
 		map.put("activityType", artistDto.getActivityType());
+		map.put("mid", artistDto.getMId());
 		
 		if (artistDto.getAgency() != null) {
 		map.put("agency", artistDto.getAgency());

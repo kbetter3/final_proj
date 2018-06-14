@@ -26,6 +26,7 @@ public class MusicDaoImpl implements MusicDao {
 		
 		map.put("name", musicDto.getName());
 		map.put("albumNo", musicDto.getAlbumNo());
+		map.put("mid", musicDto.getMId());
 		
 		if (musicDto.getLyrics() != null) {
 			map.put("lyrics", musicDto.getLyrics());

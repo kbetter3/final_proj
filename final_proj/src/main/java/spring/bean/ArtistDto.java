@@ -12,4 +12,6 @@ public class ArtistDto {
 	private String agency;
 	private String thumb;
 	private int likeCount;			/* default 0 */
+	private String regDate;
+	private String mId;
 }

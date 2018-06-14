@@ -6,14 +6,16 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into Artist(no, name, member, debutDate, activityType, agency, thumb) values(
+		insert into Artist(no, name, member, debutDate, activityType, agency, thumb, regDate, mid) values(
 		artist_seq.nextval,
 		#{name},
 		#{member},
 		to_date(#{debutDate}, 'yyyy/mm/dd'),
 		#{activityType},
 		#{agency},
-		#{thumb}
+		#{thumb},
+		sysdate,
+		#{mid}
 		)
 	</insert>
 	

@@ -28,6 +28,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		map.put("artistNo", albumDto.getArtistNo());
 		map.put("releaseDate", albumDto.getReleaseDate());
 		map.put("genre", albumDto.getGenre());
+		map.put("mid", albumDto.getMId());
 		
 		if (albumDto.getAgency() != null) {
 			map.put("agency", albumDto.getAgency());
