@@ -66,16 +66,18 @@
                             <span class="glyphicon glyphicon-search my-header-cursor" id="my-header-searchbtn"></span>
                         </div>
 
-                        <div class="my-header-nav-item-wrap my-header-nav-item-right" id="my-header-right-container">
+                        <div class="my-header-nav-item-wrap my-header-nav-item-right">
                             <div class="align-helper h45"></div>
-                            <div class="my-header-nav-item my-header-cursor" id="my-header-loginbtn">로그인</div>
-                            <div class="my-header-nav-item my-header-cursor" id="my-header-regbtn">회원가입</div>
+                            <div id="my-header-right-container">
+                                <span class="my-header-nav-item my-header-cursor" id="my-header-loginbtn">로그인</span>
+                                <span class="my-header-nav-item my-header-cursor" id="my-header-regbtn">회원가입</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <script>
             $(document).ready(function(){
                 $("#my-header-homebtn").on("click", my_header_home);

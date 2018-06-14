@@ -49,9 +49,16 @@
     right: 0;
 }
 
+/*
 .my-header-nav-item-right > .my-header-nav-item {
     margin-left: 15px;
 }
+*/
+
+#my-header-right-container > .my-header-nav-item {
+    margin-left: 15px;
+}
+
 
 .my-header-nav-item, .my-header-nav-item:link, .my-header-nav-item:visited {
     color: rgba(125, 125, 125, 1);
