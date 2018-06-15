@@ -34,7 +34,7 @@ public class PlayerController {
 	@ResponseBody
 	public void music(HttpServletRequest request, HttpServletResponse response, @RequestParam String name) throws IOException, UnsupportedAudioFileException {
 		log.debug("MN = {}", name);
-		File file = new File("D:\\spring\\asdfasdf");
+		File file = new File("C:\\music\\test.mp3");
 		log.debug("f exist = {}", file.exists());
 		RandomAccessFile target = new RandomAccessFile(file, "r");
 		

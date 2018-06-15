@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +37,23 @@ public class MemberController {
 		return "register";
 	}
 	
+//	@RequestMapping(method= {RequestMethod.POST}, value="/register")
+//	@Transactional
+//	public String doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
+//		MemberDto memberDto = new MemberDto();
+//		memberDto.setId(id);
+//		memberDto.setPw(pw);
+//		memberDto.setEmail(email);
+//		
+//		memberService.insert(memberDto);
+//		
+//		return "redirect:/chart";
+//	}
+	
 	@RequestMapping(method= {RequestMethod.POST}, value="/register")
+	@ResponseBody
 	@Transactional
-	public String doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
+	public ResponseEntity<String> doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
 		MemberDto memberDto = new MemberDto();
 		memberDto.setId(id);
 		memberDto.setPw(pw);
@@ -44,7 +61,10 @@ public class MemberController {
 		
 		memberService.insert(memberDto);
 		
-		return "redirect:/chart";
+		JSONObject jobj = new JSONObject();
+		jobj.put("rslt", "등록성공");
+		
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8").body(jobj.toString());
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/login")

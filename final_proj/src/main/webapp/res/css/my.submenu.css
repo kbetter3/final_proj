@@ -35,11 +35,20 @@
     padding: 14px 0;
 }
 
+.my-submenu-menuitem-7 {
+    text-align: center;
+    font-size: 14px;
+    width: 14.28%;
+    display: inline-block;
+    padding: 14px 0;
+}
+
 .my-submenu-container > li {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.my-submenu-menulink, .my-submenu-menulink:visited, .my-submenu-menulink:hover {
+.my-submenu-menulink {
+    cursor: pointer;
     font-weight: 500;
     text-decoration: none;
     color: white;
@@ -49,7 +58,6 @@ li.my-submenu-selected {
     background-color: white;
 }
 
-a.my-submenu-selected, a.my-submenu-selected:visited, a.my-submenu-selected:hover {
-    text-decoration: none;
+span.my-submenu-selected {
     color: rebeccapurple;
 }

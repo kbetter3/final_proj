@@ -1,7 +1,3 @@
-/**
- *  my.register.js
- */
-
 var register_idValidCheck = false;
 var register_pwValidCheck = false;
 var register_emailValidCheck = false;
@@ -248,9 +244,27 @@ function register_doRegister() {
     }
 
     if (submit) {
-    	register_encpw();
-        $("#register-form").submit();
+//    	register_encpw();
+//        $("#register-form").submit();
+        $.ajax({
+            type: "POST",
+            url: "register",
+            data: {
+                id: $("#my-register-id").val(),
+                pw: register_encpw(),
+                email: $("#my-register-email").val()
+            },
+            success: my_register_success_doRegister,
+            error: function() {
+                consoe.log("실패했음");
+            }
+        });
     }
+}
+
+function my_register_success_doRegister(jobj) {
+    console.log("회원가입 성공했음");
+    console.log(jobj.rslt);
 }
 
 function register_clipTerm() {
@@ -271,4 +285,5 @@ function register_encpw() {
     pw.val(encpw);
     console.log(encpw);
     $("#my-register-pwchck").val("");
+    return encpw;
 }
