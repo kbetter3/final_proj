@@ -48,31 +48,4 @@ public class MainController {
 		jobj.put("data", "<div>가나다라</div>");
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8").body(jobj.toString());
 	}
-	
-	@RequestMapping("/reg")
-	@ResponseBody
-	public ResponseEntity<String> reg() throws IOException {
-		File f = new File("c:\\tags\\reg.txt");
-		FileInputStream fis = new FileInputStream(f);
-		InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-		BufferedReader br = new BufferedReader(isr);
-		
-		StringBuffer buffer = new StringBuffer("");
-		char[] buff = new char[1024];
-		int rlen;
-		
-		while (isr.ready()) {
-			rlen = isr.read(buff);
-			buffer.append(buff, 0, rlen);
-			log.debug("buffer : {}", buffer);
-			log.debug("rlen : {}", rlen);
-		}
-		
-		br.close();
-		
-		JSONObject jobj = new JSONObject();
-		jobj.put("tags", buffer);
-		
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8").body(jobj.toString());
-	}
 }

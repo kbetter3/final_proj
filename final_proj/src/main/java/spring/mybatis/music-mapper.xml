@@ -47,4 +47,11 @@
 	<select id="getByNo" resultType="musicDto" parameterType="int">
 		select * from music where no=#{no}
 	</select>
+	
+	
+	
+	
+	<select id="getMusicChartOrderByPlayCount" resultType="musicDto" parameterType="int">
+		select * from music order by playcount
+	</select>
 </mapper>

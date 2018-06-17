@@ -14,16 +14,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import spring.bean.MemberDto;
+import spring.bean.RespState;
+import spring.service.BadReqService;
 import spring.service.MemberService;
+import spring.service.TagService;
 
 @Controller
 public class MemberController {
@@ -32,25 +38,20 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(method= {RequestMethod.GET}, value="/register")
-	public String register() {
-		return "register";
+	@Autowired
+	private TagService tagService;
+	
+	@Autowired
+	private BadReqService badReqService;
+	
+	
+	@GetMapping("/register")
+	@ResponseBody
+	public ResponseEntity<String> registerTag() throws IOException {
+		return tagService.getTag("register.txt");
 	}
 	
-//	@RequestMapping(method= {RequestMethod.POST}, value="/register")
-//	@Transactional
-//	public String doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
-//		MemberDto memberDto = new MemberDto();
-//		memberDto.setId(id);
-//		memberDto.setPw(pw);
-//		memberDto.setEmail(email);
-//		
-//		memberService.insert(memberDto);
-//		
-//		return "redirect:/chart";
-//	}
-	
-	@RequestMapping(method= {RequestMethod.POST}, value="/register")
+	@PostMapping("/register")
 	@ResponseBody
 	@Transactional
 	public ResponseEntity<String> doRegister(@RequestParam String id, @RequestParam String pw, @RequestParam String email) throws NoSuchAlgorithmException, MessagingException {
@@ -63,53 +64,85 @@ public class MemberController {
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("rslt", "등록성공");
-		
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8").body(jobj.toString());
 	}
 	
-	@RequestMapping(method= {RequestMethod.GET}, value="/login")
-	public String login(HttpSession session) {
-		String returnUrl;
+	
+	
+	@GetMapping("/login")
+	@ResponseBody
+	public ResponseEntity<String> loginTag(HttpSession session) throws IOException {
+		String uid = (String) session.getAttribute("uid");
+		
+		if (uid != null) {
+			return badReqService.forbiddenReq().body(null);
+		} else {
+			return tagService.getTag("login.txt");
+		}
+	}
+	
+	@PostMapping("/login")
+	@ResponseBody
+	public ResponseEntity<String> login(String id, String pw, HttpSession session) throws NoSuchAlgorithmException {
 		
 		if (session.getAttribute("uid") != null) {
-			returnUrl = "redirect:/chart"; 
+			// 이미 로그인한 사용자가 로그인 요청을 보낼 때
+			return badReqService.forbiddenReq().body(null);
 		} else {
-			returnUrl = "login";
-		}
-		
-		return returnUrl;
-	}
-	
-	@RequestMapping(method= {RequestMethod.POST}, value="/login")
-	public String doLogin(@RequestParam String id, @RequestParam String pw, HttpSession session, HttpServletRequest request) throws NoSuchAlgorithmException {
-		MemberDto memberDto = memberService.login(id, pw);
-		
-		String returnUrl = "";
-		
-		if (memberDto != null) {
-			if (memberDto.getPower() == 0) {
-				// 이메일 미인증계정 처리
-				request.setAttribute("error", "이메일 인증을 완료해 주세요.");
-				returnUrl = "login";
+			// 정상적인 로그인 요청
+			MemberDto memberDto = memberService.login(id, pw);
+			
+			JSONObject jobj = new JSONObject();
+			String msg = "";
+			
+			if (memberDto != null) {
+				// id & pw가 일치하여 계정 정보가 넘어온 상태
+				if (memberDto.getPower() == 0) {
+					// 로그인하였으나 이메일 인증을 하지 않은 상태
+					msg = "이메일 인증을 완료해 주세요.";
+					jobj.put("state", RespState.MESSAGE);
+					jobj.put("msg", msg);
+					
+					return tagService.getEmptyResponse().body(jobj.toString());
+				} else {
+					// 정상적으로 로그인을 성공한 상태
+					session.setAttribute("uid", memberDto.getId());
+					session.setAttribute("upower", memberDto.getPower());
+					
+					jobj.put("state", RespState.SUCCESS);
+					
+					return tagService.getEmptyResponse().body(jobj.toString());
+				}
 			} else {
-				// 이메일 인증계정 로그인 처리
-				session.setAttribute("uid", memberDto.getId());
-				session.setAttribute("upower", memberDto.getPower());
-				returnUrl = "redirect:/chart";
+				// 계정 정보가 올바르지 않아 로그인이 실패한 상태
+				msg = "로그인 정보가 올바르지 않습니다.";
+				jobj.put("state", RespState.MESSAGE);
+				jobj.put("msg", msg);
+				
+				return tagService.getEmptyResponse().body(jobj.toString());
 			}
-		} else {
-			request.setAttribute("error", "로그인 정보가 올바르지 않습니다.");
-			returnUrl = "login";
 		}
-		
-		return returnUrl;
 	}
 	
-	@RequestMapping(method= {RequestMethod.GET}, value="/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
+	
+	
+	@RequestMapping("/logout")
+	@ResponseBody
+	public ResponseEntity<String> logout(HttpSession session) {
+		JSONObject jobj = new JSONObject();
+		String msg = "";
 		
-		return "redirect:/chart";
+		if (session.getAttribute("uid") != null) {
+			// 로그인 상태인 경우 - 정상적인 접근
+			session.invalidate();
+			
+			jobj.put("state", RespState.SUCCESS);
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		} else {
+			// 로그인 상태가 아닌 경우
+			return badReqService.forbiddenReq().body(null);
+		}
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET}, value="/activation")
@@ -156,4 +189,32 @@ public class MemberController {
 		}
 	}
 	
+	
+	@RequestMapping("/myinfo")
+	@ResponseBody
+	public ResponseEntity<String> myInfoTag(HttpSession session) throws IOException {
+		String fileDir = "submenu\\";
+		
+		
+		if (session.getAttribute("uid") != null) {
+			// 로그인된 사용자일 경우
+			log.debug("회원이냐?");
+			switch ((int)session.getAttribute("upower")) {
+				case 1:
+					// 일반회원일 경우
+					return tagService.getTag(fileDir + "membersubmenu.txt");
+				case 2:
+					// 업로더일 경우
+					return tagService.getTag(fileDir + "uploadersubmenu.txt");
+				case 9:
+					// 관리자일 경우
+					return tagService.getTag(fileDir + "adminsubmenu.txt");
+				default:
+					return badReqService.forbiddenReq().body(null);
+			}
+		} else {
+			// 비정상 접근 (로그인하지 않은 사용자)
+			return badReqService.forbiddenReq().body(null);
+		}
+	}
 }

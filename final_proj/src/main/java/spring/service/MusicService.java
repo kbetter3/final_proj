@@ -2,6 +2,7 @@ package spring.service;
 
 import java.util.List;
 
+import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import spring.bean.MusicDto;
@@ -16,6 +17,8 @@ public void insert(MusicDto musicDto);
 	public List<MusicDto> getListByAlbumNo(int albumNo);
 	public List<MusicDto> getListByGenre(String genre);
 	public List<MusicDto> getListByArtistNo(int artistNo);
+	
+	public JSONArray getMusicChart(String type, int page);
 	
 	public MusicDto getByNo(int no);
 }

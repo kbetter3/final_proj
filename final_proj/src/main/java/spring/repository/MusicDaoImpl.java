@@ -76,6 +76,15 @@ public class MusicDaoImpl implements MusicDao {
 	public List<MusicDto> getListByArtistNo(int artistNo) {
 		return sqlSession.selectList("spring.repository.MusicDao.getListByArtistNo", artistNo);
 	}
+	
+	
+	
+	@Override
+	public List<MusicDto> getMusicChartOrderByPlayCount(int page) {
+		return sqlSession.selectList("spring.repository.MusicDao.getMusicChartOrderByPlayCount", page);
+	}
+	
+	
 
 	@Override
 	public MusicDto getByNo(int no) {

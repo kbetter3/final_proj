@@ -1,0 +1,183 @@
+body{
+    font-family:"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+    border-color:rebeccapurple;
+    background:mediumpurple;
+    color:#fff;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+    border-color:mediumpurple;
+    background:rebeccapurple;
+    color:#fff;
+}
+.my-upload-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px 50px;
+    background-color: white;
+    font-size:0;
+}
+.my-upload-img-div,.my-upload-music-div{
+    display:inline-block;
+    margin-right:20px;
+    width:390px;
+    text-align:center;
+    vertical-align: top;
+}
+.my-upload-img-wrap,.my-upload-music-wrap{
+    position:relative;
+    margin-top:20px;
+}
+.my-upload-img-wrap .my-upload-img-label{
+    position:absolute;
+    width:300px;
+    top:0;
+    left:50%;
+    margin:0 0 0 -150px;
+    height:300px;
+}
+.my-upload-img-wrap .my-upload-label,.my-upload-music-wrap .my-upload-label{
+    display:table-cell;
+    width:300px;
+    height:300px;
+    vertical-align:middle;
+    color:#ccc;
+    font-weight:normal;
+}
+.my-upload-img-div .my-upload-row-left,.my-upload-music-div .my-upload-row-left{
+    text-align:left;
+}
+.my-upload-img-div img,.my-upload-music-div textarea{
+    width:300px;
+    height:300px;
+    display:inline-block;
+}
+.my-upload-music-div textarea{
+    resize:none;
+    font-size:16px;
+    padding:10px;
+    outline:none;
+}
+.my-upload-content-div{
+    width:550px;
+    display:inline-block;
+    vertical-align: top;
+}
+.my-upload-title {
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+
+.my-upload-row {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    font-size:0;
+}
+
+.my-upload-row>div{
+    display:inline-block;
+    font-size:0;
+    vertical-align:middle;
+}
+.my-upload-row-left{
+    width:115px;
+    margin-right:20px;
+}
+.my-upload-music-div .my-upload-row-left{
+    width:120px;
+}
+.my-upload-music-div .my-upload-row-right .my-upload-label{
+    max-width:160px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+
+}
+.my-upload-label, .my-upload-input {
+    margin: 0;
+    font-size: 1.2em;
+}
+.my-upload-label{
+    display:inline-block;
+    max-width:100%;
+    font-weight:700;
+    font-size:16px;
+}
+input.my-upload-input-radio{
+    vertical-align:middle;
+    margin:0;
+    display:inline-block;
+}
+.my-upload-label2{
+    font-weight: normal;
+    margin:0 30px 0 5px;
+    vertical-align:middle;
+}
+.my-upload-input {
+    border: 1px solid rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size:16px;
+    width: 310px;
+    height: 60px;
+}
+.my-upload-input:focus {
+    outline: none;
+}
+
+input[type="file"].my-upload-input2 { /* 파일 필드 숨기기 */ position: absolute; width: 0; height: 0; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; display: inline-block;}
+.my-upload-fileupload-button{
+    display:inline-block;
+    width:118px;
+    vertical-align:middle;
+    height:58px;
+    margin-bottom:0;
+    text-align:center;
+    color:mediumpurple;
+    font-weight:normal;
+    border-radius:10px;
+    cursor:pointer;
+    border:1px solid mediumpurple;
+}
+.my-upload-fileupload-button:hover{
+    background:mediumpurple;
+    color:#fff;
+}
+.my-upload-fileupload-button:hover{
+    text-decoration:none;
+    color:#fff;
+}
+.my-upload-fileupload-name{
+    margin-bottom:0;
+    display:inline-block;
+    vertical-align:middle;
+    font-size:16px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin-left:20px;
+    width:175px;
+}
+.my-upload-label3{
+    cursor:pointer;
+    display:table-cell;
+    height:60px;
+    font-size:16px;
+    vertical-align:middle;
+    width:120px;
+    font-weight:normal;
+}
+.my-upload-submit-button{
+    width:300px;
+    outline:none;
+    height:60px;
+    font-size:16px;
+    background:rebeccapurple;
+    border:none;
+    border-radius:10px;
+    color:#fff;
+    margin:50px auto;
+    display:block;
+}

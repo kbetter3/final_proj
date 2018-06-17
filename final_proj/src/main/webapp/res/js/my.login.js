@@ -1,13 +1,10 @@
-/**
- *  my.login.js
- */
 var login_idNullCheck = false;
 var login_pwNullCheck = false;
 
 function login_idCheck() {
     var input = $("#my-login-id");
     var id = input.val();
-    
+
     if (id.length === 0) {
         input.addClass("my-member-red-border");
         $(".my-login-id-info").show();
@@ -24,7 +21,7 @@ function login_idCheck() {
 function login_pwCheck() {
     var input = $("#my-login-pw");
     var pw = input.val();
-    
+
     if (pw.length === 0) {
         input.addClass("my-member-red-border");
         $(".my-login-pw-info").show();
@@ -39,15 +36,37 @@ function login_pwCheck() {
 function login_login() {
     login_idCheck();
     login_pwCheck();
-    
+
     if (login_idNullCheck && login_pwNullCheck) {
-        login_encpw();
-        $("#login-form").submit();
+        $.ajax({
+            type: "POST",
+            url: "login",
+            data: {
+                id: $("#my-login-id").val(),
+                pw: login_encpw()
+            },
+            success: login_success_login
+        });
     }
 }
+
+function login_success_login(jobj) {
+    console.log("로그인 성공하였음");
+    console.log(jobj.state);
+    if (jobj.state == RespState.success) {
+        my_header_header();
+        my_menu_menu();
+//        my_submenu_chartsubmenu();
+        my_submenu_submenu("chartsubmenu");
+        my_chart_chart();
+    } else if (jobj.state == RespState.message) {
+        $("#my-login-errormsg").text(jobj.msg);
+    }
+}
+
 
 function login_encpw() {
     var pw = $("#my-login-pw").val();
     var encpw = SHA256(pw);
-    $("#my-login-pw").val(encpw);
+    return encpw;
 }

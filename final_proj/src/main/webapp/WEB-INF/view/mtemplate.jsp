@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		
+		
         <link rel="stylesheet" href="${rootPath}/res/css/my.common.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.header.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.member.css">
@@ -21,6 +23,10 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.menu.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.submenu.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.chart.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.upload.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.voucher.css">
+        
+        
 
         <style>
         /* style */
@@ -38,7 +44,9 @@
         <script src="${rootPath}/res/js/my.register.js"></script>
         <script src="${rootPath}/res/js/my.header.js"></script>
         <script src="${rootPath}/res/js/my.chart.js"></script>
+        <script src="${rootPath}/res/js/my.menu.js"></script>
         <script src="${rootPath}/res/js/my.submenu.js"></script>
+        <script src="${rootPath}/res/js/my.state.js"></script>
         
     </head>
         
@@ -67,13 +75,11 @@
                             <input type="search" class="my-header-nav-search" placeholder="Search...">
                             <span class="glyphicon glyphicon-search my-header-cursor" id="my-header-searchbtn"></span>
                         </div>
-                        
+
                         <div class="my-header-nav-item-wrap my-header-nav-item-right">
                             <div class="align-helper h45"></div>
 <!--                            로그인 여부에 따라 내용물이 변하는 컨테이너-->
                             <div id="my-header-right-container">
-                                <span class="my-header-nav-item my-header-cursor" id="my-header-loginbtn">로그인</span>
-                                <span class="my-header-nav-item my-header-cursor" id="my-header-regbtn">회원가입</span>
                             </div>
                         </div>
                     </div>
@@ -85,38 +91,26 @@
             $(document).ready(function(){
                 $("#my-header-homebtn").on("click", my_header_home);
                 $("#my-header-voucherbtn").on("click", my_header_voucher);
-                $("#my-header-loginbtn").on("click", my_header_login);
-                $("#my-header-regbtn").on("click", my_header_register);
             });
         </script>
-        
+
 <!--        메뉴 시작지점-->
         <div class="my-container" id="my-menu-container">
-            <div class="my-menu-wrap">
-                <ul class="my-menu-left">
-                    <li class="my-menu-menuitem"><a href="${rootPath}/chart">차트</a></li>
-                    <li class="my-menu-menuitem"><a href="${rootPath}/new">최신</a></li>
-                    <li class="my-menu-menuitem"><a href="${rootPath}/genre">장르</a></li>
-                </ul>
-                <ul class="my-menu-right">
-                    <li class="my-menu-menuitem"><a href="${rootPath}/mymusic">마이뮤직</a></li>
-                    <li class="my-menu-menuitem"><a href="${rootPath}/notice">공지사항</a></li>
-                </ul>
-            </div>
         </div>
 
 <!--        서브메뉴 시작지점-->
         <div class="my-container" id="my-submenu-container">
         </div>
 
-<!--        컨텐츠 시작 지점-->        
+<!--        컨텐츠 시작 지점-->
         <div class="my-container" id="my-contents-container">
         </div>
-        
+
         <script>
             $(document).ready(function(){
-                my_submenu_chartsubmenu();
-                my_chart_chart();
+                my_header_header();
+                my_menu_menu();
+                my_submenu_submenu("chartsubmenu");
             });
         </script>
     </body>

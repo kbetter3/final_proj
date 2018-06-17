@@ -8,44 +8,115 @@ import java.io.InputStreamReader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import spring.bean.RespState;
+import spring.service.MusicService;
+import spring.service.TagService;
 
 @Controller
 public class SubmenuController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping("/chartsubmenu")
+	@Autowired
+	private MusicService musicService;
+	
+	@Autowired
+	private TagService tagService;
+	
+	@RequestMapping("/header")
 	@ResponseBody
-	public ResponseEntity<String> test(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		File f = new File("c:\\tags\\submenu\\chartsubmenu.txt");
-		FileInputStream fis = new FileInputStream(f);
-		InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-		BufferedReader br = new BufferedReader(isr);
+	public ResponseEntity<String> header(HttpSession session) throws IOException {
+		JSONObject jobj = new JSONObject();
 		
-		StringBuffer buffer = new StringBuffer("");
-		char[] buff = new char[1024];
-		int rlen;
+		String fname = "";
 		
-		while (isr.ready()) {
-			rlen = isr.read(buff);
-			buffer.append(buff, 0, rlen);
-			log.debug("buffer : {}", buffer);
-			log.debug("rlen : {}", rlen);
+		if (session.getAttribute("uid") != null) {
+			// 로그인된 사용자의 요청
+			fname = "header\\memberheader.txt";
+			return tagService.getTag(fname, "uid", session.getAttribute("uid"));
+		} else {
+			// 로그인하지 않은 사용자의 요청
+			fname = "header\\userheader.txt";
+			return tagService.getTag(fname);
+		}
+	}
+	
+	
+	@GetMapping("/voucher")
+	@ResponseBody
+	public ResponseEntity<String> voucherTag(HttpSession session) throws IOException {
+		if (session.getAttribute("uid") != null) {
+			// 정상 접근 - 로그인한 사용자가 접근한 경우
+			return tagService.getTag("voucher.txt");
+		} else {
+			// 로그인하지 않은 사용자가 접근한 경우
+			JSONObject jobj = new JSONObject();
+			jobj.put("state", RespState.MESSAGE);
+			jobj.put("msg", "로그인한 사용자만 접근할 수 있습니다.");
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
+	}
+	
+	
+	
+	@PostMapping("/menu")
+	@ResponseBody
+	public ResponseEntity<String> menu() throws IOException {
+		return tagService.getTag("menu\\menu.txt");
+	}
+	
+	@RequestMapping("/submenu")
+	@ResponseBody
+	public ResponseEntity<String> submenuTag(String fname, HttpSession session) throws IOException {
+		String fileDir = "submenu\\";
+		
+		if (fname.equals("mysubmenu")) {
+			// 마이뮤직 메뉴에 접근한 상태
+			if (session.getAttribute("uid") != null) {
+				// 로그인한 사용자가 요청한 상태
+				return tagService.getTag(fileDir + fname + ".txt");
+			} else {
+				// 로그인하지 않은 사용자가 요청한 상태
+				JSONObject jobj = new JSONObject();
+				jobj.put("state", RespState.MESSAGE);
+				jobj.put("msg", "로그인한 사용자만 사용할 수 있습니다.");
+				
+				return tagService.getEmptyResponse().body(jobj.toString());
+			}
+		} else {
+			// 마이뮤직을 제외한 메뉴를 접근한 상태
+			return tagService.getTag(fileDir + fname + ".txt");
+		}
+	}
+	
+	
+	@RequestMapping("/getmusic")
+	@ResponseBody
+	public ResponseEntity<String> getMusic(String type, int page) {
+		JSONObject jobj = new JSONObject();
+		String msg = "";
+		jobj.put("state", RespState.SUCCESS);
+		
+		if (type == null) {
+			type = "chartrealtime";
 		}
 		
-		br.close();
+		jobj.put("music", musicService.getMusicChart(type, page));
 		
-		JSONObject jobj = new JSONObject();
-		jobj.put("tags", buffer);
-		
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8").body(jobj.toString());
+		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 }

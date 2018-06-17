@@ -1,12 +1,8 @@
-/**
- * 
- */
-
 function my_chart_test() {
     var r = $("#my-chart-music-row-template").clone(true, true);
     r.find("#my-chart-cb").attr("name", "mno").attr("value", "kk2");
-    
-    $("#my-chart-music-container").append(r.clone().show()).append(r.clone().show());
+
+    $("#my-chart-music-container").html("").append(r.clone().show()).append(r.clone().show());
 }
 
 function my_chart_add_music(no, jobj) {
@@ -21,22 +17,20 @@ function my_chart_add_music(no, jobj) {
 //    좋아요 여부
 //    mRow.children(".my-chart-likebtn")
     mRow.find(".my-chart-likecnt").text(jobj.likecnt);
-    
+
     $("#my-chart-music-container").append(mRow.show());
 }
 
-function my_chart_getMusic(target, page) {
-    
-}
 
-function my_chart_chart() {
+function my_chart_chart(target, page) {
     $.ajax({
         type: "POST",
         url: "chart",
+        async: true,
         success: my_chart_success_chart
     });
 }
 
 function my_chart_success_chart(jobj) {
-    $("#my-contents-container").append(jobj.tags);
+    $("#my-contents-container").html("").append(jobj.tags);
 }
