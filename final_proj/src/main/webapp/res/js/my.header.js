@@ -35,9 +35,13 @@ function my_header_voucher() {
 }
 
 function my_header_success_voucher(jobj) {
-    $("#my-menu-container").html("");
-    $("#my-submenu-container").html("");
-    $("#my-contents-container").html("").append(jobj.tags);
+    if (jobj.state == RespState.tags) {
+        $("#my-menu-container").html("");
+        $("#my-submenu-container").html("");
+        $("#my-contents-container").html("").append(jobj.tags);
+    } else {
+        console.log("로그인 전용 메뉴");
+    }
 }
 
 
@@ -96,4 +100,5 @@ function my_header_logout() {
 
 function my_header_success_logout(jobj) {
     my_header_header();
+    my_player_player();
 }

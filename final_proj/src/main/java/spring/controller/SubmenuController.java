@@ -30,6 +30,8 @@ import spring.service.TagService;
 public class SubmenuController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
+	private String submenuDir = "submenu\\";
+	
 	@Autowired
 	private MusicService musicService;
 	
@@ -102,6 +104,68 @@ public class SubmenuController {
 			return tagService.getTag(fileDir + fname + ".txt");
 		}
 	}
+	
+	
+	// 가수/그룹 관리
+	@RequestMapping("/artistmgmt")
+	@ResponseBody
+	public ResponseEntity<String> artistmgmtTag(HttpSession session) throws IOException {
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.MESSAGE);
+		jobj.put("msg", "권한이 없습니다.");
+		
+		if (session.getAttribute("uid") != null) {
+			// 로그인한 사용자가 접근할 때
+			switch ((int)session.getAttribute("upower")) {
+			case 2:	// 업로더가 접근한 경우
+			case 9: // 관리자가 접근한 경우
+				return tagService.getTag("artistmgmt.txt");
+			default:
+				break;
+			}
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		} else {
+			// 로그인하지 않은 사용자가 접근한 경우
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
+	}
+	
+	// 가수/그룹 컨텐츠
+	@RequestMapping("/artistcont")
+	@ResponseBody
+	public ResponseEntity<String> artistcont(HttpSession session) {
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.MESSAGE);
+		jobj.put("msg", "권한이 없습니다.");
+		
+		if (session.getAttribute("uid") != null) {
+			// 로그인한 사용자가 접근한 경우
+			switch ((int)session.getAttribute("upower")) {
+			case 2:
+				// 업로더가 요청한 경우
+				break;
+			case 9:
+				// 관리자가 요청한 경우
+				break;
+			default:
+				// 비정상 요청 - 권한이 없는 사용자의 요청
+				break;
+			}
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		} else {
+			// 로그인하지 않은 사용자가 접근한 경우
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
+	}
+	
+	@GetMapping("/mgmt/artistupload")
+	@ResponseBody
+	public ResponseEntity<String> artistuploadTag() throws IOException {
+		return tagService.getTag("artistupload.txt");
+	}
+	
 	
 	
 	@RequestMapping("/getmusic")

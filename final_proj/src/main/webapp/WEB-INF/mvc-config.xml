@@ -21,6 +21,11 @@
 			<mvc:mapping path="/uploader/**"/>
 			<bean class="spring.interceptor.UploaderInterceptor"></bean>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/mgmt/**"/>
+			<bean class="spring.interceptor.MgmtInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
     <mvc:annotation-driven />

@@ -198,13 +198,13 @@ public class MemberController {
 		
 		if (session.getAttribute("uid") != null) {
 			// 로그인된 사용자일 경우
-			log.debug("회원이냐?");
 			switch ((int)session.getAttribute("upower")) {
 				case 1:
 					// 일반회원일 경우
 					return tagService.getTag(fileDir + "membersubmenu.txt");
 				case 2:
 					// 업로더일 경우
+					log.debug("업로더냐");
 					return tagService.getTag(fileDir + "uploadersubmenu.txt");
 				case 9:
 					// 관리자일 경우

@@ -1,0 +1,288 @@
+.my-player-wrap ul,.my-player-wrap li,.my-player-wrap button,.my-player-wrap p{list-style: none;margin:0;padding:0;background:none;border:none}
+.my-player-wrap button.glyphicon,.my-player-wrap span.glyphicon{opacity:1;transform:scale(1);top:0;font-size:14px;color:#2e2e2e}
+.my-player-wrap button{
+    outline:none;
+}
+.my-player-wrap {
+    color:#666;
+    width: 100%;
+    min-width: 1060px;
+    position: fixed;
+    bottom: 0;
+}
+.my-player-outer-container{
+    height:48px;
+    background: #f2f2f2;
+    border-top:1px solid #cecece;
+}
+.my-player-container {
+    margin: 0 auto;
+    width: 1060px;
+}
+.my-player-container>div{
+    display:table-cell;
+    vertical-align: middle;
+    height:48px;
+    position:relative;
+}
+
+li.my-player-icon-keys{
+    display:inline-block;
+    vertical-align:middle;
+    text-align:center;
+    width:24px;
+    height:100%;
+    margin:0 0 0 12px;
+}
+.my-player-icon-keys button{
+    height:100%;
+}
+.my-player-icon-keys.my-player-shuffle button.my-player-shuffle{
+    color:mediumpurple;
+}
+.my-player-icon-keys.my-player-repeat button.my-player-on{
+    color:mediumpurple;
+}
+
+.my-player-controls{
+    padding-right:20px;
+}
+.my-player-controls ul{
+    font-size:0;
+    height:100%;
+    width: 180px;
+}
+
+.my-player-timeline{
+    font-size:0;
+    width:574px;
+}
+.my-player-timeline-inner{
+    display:table;
+    width:100%;
+}
+.my-player-timeline-inner>div{
+    display:table-cell;
+    height:48px;
+    vertical-align:middle;
+}
+.my-player-timeline-inner .my-player-timeline-nowplaying{
+    width:50px;
+    font:11px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+.my-player-timeline-inner .my-player-timeline-nowplaying.my-player-timer{
+    text-align:right;
+    color: mediumpurple;
+}
+.my-player-timeline-inner .my-player-timeline-nowplaying p{
+    display:table-cell;
+    vertical-align:middle;
+    width:50px;
+    height:48px;
+}
+.my-player-timeline-inner .my-player-progress-wrap{
+    width:325px;
+}
+.my-player-timeline-inner .my-player-timeline-volume-control{
+    width:104px;
+    font-size:0;
+    white-space:nowrap;
+}
+.my-player-timeline-inner .my-player-volume{
+    display: inline-block;
+    vertical-align:middle;
+}
+.my-player-timeline-inner .my-player-timeline-volume-control .my-player-volume button{
+    margin:0;
+}
+.my-player-timeline-inner .my-player-timeline-volume-control .my-player-progress-wrap{
+    width:80px;
+}
+
+.my-player-progress-wrap{
+    padding:0 10px;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.my-player-progress-outline{
+    height:1px;
+    width:100%;
+    background:#ccc;
+    position: relative
+}
+.my-player-progress-bar{
+    position: absolute;
+    top:0;
+    background: mediumpurple;
+    left:0;
+    height:1px;
+}
+button.my-player-progress-button{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    position:absolute;
+    top:-5px;
+    margin-left:-5px;
+    background:mediumpurple;
+    border-radius:50%;
+}
+.my-player-nowplaying{
+    width:250px;
+    font-size:0;
+}
+.my-player-nowplaying img{
+    width:30px;
+    height:30px;
+    display:inline-block;
+    margin-right:10px;
+    vertical-align:middle;
+}
+.my-player-nowplaying .my-player-song-info,.my-player-layer-playlist-songs .my-player-song-info{
+    display:inline-block;
+    vertical-align:middle;
+    width:209px;
+}
+.my-player-nowplaying .my-player-song-info p{
+    position: relative;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font:12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+.my-player-nowplaying .my-player-song-info .my-player-song-info-title{
+    color:#999;
+}
+.my-player-others{
+    width:34px;
+}
+.my-player-playlist>button.glyphicon-list.my-player-on{
+    color:mediumpurple;
+}
+.my-player-layer-playlist{
+    position: absolute;
+    bottom:54px;
+    width:480px;
+    max-height:496px;
+    right:8px;
+    box-shadow:0 0 4px rgba(0,0,0,.25);
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.my-player-layer-playlist button.my-player-layer-close{
+    position: absolute;
+    top:9px;
+    width:39px;
+    height:46px;
+    text-align:center;
+    right:0;
+}
+.my-player-playlist-list-wrap{
+    height:64px;
+    padding:9px 24px;
+    position:relative;
+    border-bottom:1px solid #e5e5e5;
+}
+.my-player-playlist-title{
+    font-size:0;
+    text-align:left;
+}
+.my-player-playlist-title button{
+    display:table-cell;
+    vertical-align: middle;
+    text-align:left;
+    height:46px;
+    width:400px;
+}
+.my-player-playlist-title p,.my-player-playlist-title span{
+    display:inline-block;
+    vertical-align:middle;
+    font-size:16px;
+    margin-right:10px;
+}
+.my-player-playlist-title p{
+    font-family:"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+.my-player-playlist-list{
+    position: absolute;
+    z-index:10;
+    width:300px;
+    max-height:300px;
+    box-shadow:0 0 4px rgba(0,0,0,.25);
+    background:#fff;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.my-player-playlist-list li{
+    position:relative;
+    width:100%;
+    height:40px;
+    box-sizing:border-box;
+    padding:10px;
+}
+.my-player-playlist-list li button{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:0;
+    height:100%;
+}
+.my-player-playlist-list li button.my-player-on{
+    background:#f2f2f2;
+}
+.my-player-playlist-list li button:hover{
+    background:#f2f2f2;
+}
+.my-player-playlist-list p{
+    padding:0 10px;
+    width:100%;
+    position:relative;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    text-align:left;
+    font:12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+.my-player-layer-playlist-songs{
+    font-size:0;
+}
+.my-player-layer-playlist-songs li button{
+    font:12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    padding:10px 0;
+    width:100%;
+}
+.my-player-layer-playlist-songs li button:hover{
+    background:#f2f2f2;
+}
+.my-player-layer-playlist-songs li button.my-player-on{
+    background:#f2f2f2;
+}
+.my-player-layer-playlist-songs .my-player-img-div{
+    width:7%;
+    display: inline-block;
+}
+.my-player-layer-playlist-songs img{
+    width:30px;
+    height:30px;
+}
+.my-player-layer-playlist-songs .my-player-song-info{
+    width:340px;
+    display:inline-block;
+    position:relative;
+    text-align:left;
+    padding-left:20px;
+}
+.my-player-layer-playlist-songs .my-player-song-info p{
+    position:relative;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.my-player-layer-playlist-songs .my-player-song-time{
+    width:50px;
+    display:inline-block;
+    position:relative;
+    text-align:right;
+}
+

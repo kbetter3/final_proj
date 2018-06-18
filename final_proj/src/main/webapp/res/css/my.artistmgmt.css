@@ -1,0 +1,67 @@
+.my-artistmgmt-contents-wrap {
+    width: 100%;
+}
+
+.my-artistmgmt-title-wrap {
+    height: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#my-artistmgmt-title-no, .my-artistmgmt-no {
+    padding-right: 5px;
+    text-align: center;
+    width: 65px;
+}
+
+#my-artistmgmt-title-thumb {
+    width: 60px;
+}
+
+#my-artistmgmt-title-artistinfo, .my-artistmgmt-artistinfo {
+    padding-left: 12px;
+/*    width: 340px;*/
+    width: 300px;
+}
+
+#my-artistmgmt-title-activitytype, .my-artistmgmt-activitytype {
+    padding-left: 12px;
+    width: 100px;
+}
+
+#my-artistmgmt-title-agency, .my-artistmgmt-agency {
+    padding-left: 20px;
+    width: 200px;
+}
+
+#my-artistmgmt-title-debutdate, .my-artistmgmt-debutdate {
+    padding-left: 12px;
+    width: 100px;
+}
+
+#my-artistmgmt-title-like {
+    padding-left: 36px;
+    width: 135px;
+}
+
+.my-artistmgmt-like {
+    padding-left: 18px;
+}
+
+#my-artistmgmt-title-edit, #my-artistmgmt-title-delete, .my-artistmgmt-edit, .my-artistmgmt-delete {
+    text-align: center;
+    width: 50px;
+}
+
+.my-artistmgmt-editbtn, .my-artistmgmt-deletebtn {
+    transform: scale(1.2);
+    border: none;
+    background-color: inherit;
+}
+
+.my-artistmgmt-artist-row {
+    height: 85px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+

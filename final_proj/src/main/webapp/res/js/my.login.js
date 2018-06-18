@@ -51,16 +51,15 @@ function login_login() {
 }
 
 function login_success_login(jobj) {
-    console.log("로그인 성공하였음");
     console.log(jobj.state);
     if (jobj.state == RespState.success) {
         my_header_header();
         my_menu_menu();
-//        my_submenu_chartsubmenu();
         my_submenu_submenu("chartsubmenu");
         my_chart_chart();
+        my_player_player();
     } else if (jobj.state == RespState.message) {
-        $("#my-login-errormsg").text(jobj.msg);
+        $(".my-login-errormsg").text(jobj.msg);
     }
 }
 

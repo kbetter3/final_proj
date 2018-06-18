@@ -25,6 +25,9 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.chart.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.upload.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.voucher.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.player.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.artistmgmt.css">
+        
         
         
 
@@ -47,6 +50,8 @@
         <script src="${rootPath}/res/js/my.menu.js"></script>
         <script src="${rootPath}/res/js/my.submenu.js"></script>
         <script src="${rootPath}/res/js/my.state.js"></script>
+        <script src="${rootPath}/res/js/my.player.js"></script>
+        <script src="${rootPath}/res/js/my.mgmt.js"></script>
         
     </head>
         
@@ -106,11 +111,14 @@
         <div class="my-container" id="my-contents-container">
         </div>
 
+		<div id="my-player-container"></div>
+		
         <script>
             $(document).ready(function(){
                 my_header_header();
                 my_menu_menu();
                 my_submenu_submenu("chartsubmenu");
+                my_player_player();
             });
         </script>
     </body>

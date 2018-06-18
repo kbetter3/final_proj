@@ -9,25 +9,56 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
+import spring.bean.RespState;
+import spring.service.BadReqService;
+import spring.service.TagService;
+
 @Controller
 public class PlayerController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping(value="/player")
-	public String player() {
-		return "player";
+	@Autowired
+	private TagService tagService;
+	
+	@Autowired
+	private BadReqService badReqService;
+	
+//	@RequestMapping(value="/player")
+//	public String player() {
+//		return "player";
+//	}
+	
+	@RequestMapping("/player")
+	@ResponseBody
+	public ResponseEntity<String> playerTag(HttpSession session) throws IOException {
+		if (session.getAttribute("uid") != null) {
+			// 정상접근 - 로그인한 사용자가 요청한 경우
+			return tagService.getTag("player.txt");
+		} else {
+			// 로그인하지 않은 사용자가 요청한 경우
+//			return badReqService.forbiddenReq().body(null);
+			JSONObject jobj = new JSONObject();
+			jobj.put("state", RespState.MESSAGE);
+			jobj.put("msg", "로그인한 사용자만 사용할 수 있습니다.");
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
 	}
 	
 	@RequestMapping(value="/music")
