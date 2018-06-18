@@ -1,0 +1,57 @@
+.my-musicmgmt-contents-wrap {
+    width: 100%;
+}
+
+.my-musicmgmt-title-wrap {
+    height: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#my-musicmgmt-title-cb {
+    width: 15px;
+}
+
+#my-musicmgmt-title-no, .my-musicmgmt-no {
+    padding-right: 5px;
+    text-align: center;
+    width: 65px;
+}
+
+#my-musicmgmt-title-thumb {
+    width: 60px;
+}
+
+#my-musicmgmt-title-musicinfo, .my-musicmgmt-musicinfo {
+    padding-left: 12px;
+    width: 340px;
+}
+
+#my-musicmgmt-title-album, .my-musicmgmt-album {
+    padding-left: 12px;
+    width: 280px;
+}
+
+#my-musicmgmt-title-like {
+    padding-left: 36px;
+    width: 135px;
+}
+
+.my-musicmgmt-like {
+    padding-left: 18px;
+}
+
+#my-musicmgmt-title-listen, #my-musicmgmt-title-add, #my-musicmgmt-title-down, .my-musicmgmt-listen, .my-musicmgmt-add, .my-musicmgmt-down {
+    text-align: center;
+    width: 55px;
+}
+
+.my-musicmgmt-music-row {
+    height: 85px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.my-musicmgmt-likebtn, .my-musicmgmt-listenbtn, .my-musicmgmt-addbtn, .my-musicmgmt-downbtn {
+    border: none;
+    background-color: inherit;
+}

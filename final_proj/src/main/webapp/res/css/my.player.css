@@ -161,6 +161,7 @@ button.my-player-progress-button{
     color:mediumpurple;
 }
 .my-player-layer-playlist{
+    display: none;
     position: absolute;
     bottom:54px;
     width:480px;

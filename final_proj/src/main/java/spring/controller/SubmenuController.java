@@ -171,7 +171,6 @@ public class SubmenuController {
 	@RequestMapping("/mgmt/albummgmt")
 	@ResponseBody
 	public ResponseEntity<String> albummgmtTag() throws IOException {
-		log.debug("호출되었나?");
 		return tagService.getTag("albummgmt.txt");
 	}
 	
@@ -187,6 +186,30 @@ public class SubmenuController {
 	public ResponseEntity<String> albumuploadTag() throws IOException {
 		return tagService.getTag("albumupload.txt");
 	}
+	
+	
+	
+	@RequestMapping("/mgmt/musicmgmt")
+	@ResponseBody
+	public ResponseEntity<String> musicmgmtTag() throws IOException {
+		return tagService.getTag("musicmgmt.txt");
+	}
+	
+	@RequestMapping("/mgmt/musiccont")
+	@ResponseBody
+	public ResponseEntity<String> musiccont() {
+		JSONObject jobj = new JSONObject();
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
+	
+	@GetMapping("/mgmt/musicupload")
+	@ResponseBody
+	public ResponseEntity<String> musicuploadTag() throws IOException {
+		return tagService.getTag("musicupload.txt");
+	}
+	
+	
 	
 	@RequestMapping("/getmusic")
 	@ResponseBody

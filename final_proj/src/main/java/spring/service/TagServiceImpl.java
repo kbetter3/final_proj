@@ -28,7 +28,8 @@ public class TagServiceImpl implements TagService {
 	
 	@Override
 	public ResponseEntity<String> getTag(String fname, String key, Object value) throws IOException {
-		String fileDir = "D:\\tags\\";
+		String fileDir = "C:\\tags\\";
+//		String fileDir = "D:\\tags\\";
 //		String fileDir = "E:\\tags\\";
 		File target = new File(fileDir + fname);
 		FileInputStream fis = new FileInputStream(target);

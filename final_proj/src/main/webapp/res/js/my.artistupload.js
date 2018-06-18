@@ -6,3 +6,25 @@ function my_artistupload_radio() {
         $("#my-upload-artist-member").prop("disabled", false);
     }
 }
+
+function my_artistupload_picture_select() {
+    var formData = new FormData();
+    formData.append("pic", $(this)[0].files[0]);
+    
+    $.ajax({
+        url: "pictest",
+        data: {
+            mFile : formData
+        },
+        processData: false,
+        contentType: false,
+        type: "POST",
+        success: my_artistupload_success_picture_select
+    });
+}
+
+function my_artistupload_success_picture_select(jobj) {
+    var fname = jobj.data;
+    
+    $("#my-artistupload-img").css("background-image", "pictest2?fname="+fname);
+}

@@ -101,7 +101,7 @@ function my_mgmt_success_musicmgmt(jobj) {
 function my_mgmt_musiccont() {
     $.ajax({
         url: "mgmt/musiccont",
-        success: my_music_success_musiccont
+        success: my_mgmt_success_musiccont
     });
 }
 

@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.player.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.artistmgmt.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.albummgmt.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.musicmgmt.css">
         
         
         
@@ -40,6 +41,7 @@
         <script src="https://code.jquery.com/jquery-latest.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <script src="${rootPath}/res/js/jplayer/jquery.jplayer.min.js"></script>
         
@@ -53,7 +55,10 @@
         <script src="${rootPath}/res/js/my.state.js"></script>
         <script src="${rootPath}/res/js/my.player.js"></script>
         <script src="${rootPath}/res/js/my.mgmt.js"></script>
+        
         <script src="${rootPath}/res/js/my.artistupload.js"></script>
+        <script src="${rootPath}/res/js/my.albumupload.js"></script>
+        <script src="${rootPath}/res/js/my.musicupload.js"></script>
         
     </head>
         
