@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="${rootPath}/res/css/my.voucher.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.player.css">
         <link rel="stylesheet" href="${rootPath}/res/css/my.artistmgmt.css">
+        <link rel="stylesheet" href="${rootPath}/res/css/my.albummgmt.css">
         
         
         
@@ -52,6 +53,7 @@
         <script src="${rootPath}/res/js/my.state.js"></script>
         <script src="${rootPath}/res/js/my.player.js"></script>
         <script src="${rootPath}/res/js/my.mgmt.js"></script>
+        <script src="${rootPath}/res/js/my.artistupload.js"></script>
         
     </head>
         

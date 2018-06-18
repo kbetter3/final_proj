@@ -168,6 +168,26 @@ public class SubmenuController {
 	
 	
 	
+	@RequestMapping("/mgmt/albummgmt")
+	@ResponseBody
+	public ResponseEntity<String> albummgmtTag() throws IOException {
+		log.debug("호출되었나?");
+		return tagService.getTag("albummgmt.txt");
+	}
+	
+	@RequestMapping("/mgmt/albumcont")
+	@ResponseBody
+	public ResponseEntity<String> artistcont() {
+		JSONObject jobj = new JSONObject();
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
+	
+	@GetMapping("/mgmt/albumupload")
+	public ResponseEntity<String> albumuploadTag() throws IOException {
+		return tagService.getTag("albumupload.txt");
+	}
+	
 	@RequestMapping("/getmusic")
 	@ResponseBody
 	public ResponseEntity<String> getMusic(String type, int page) {

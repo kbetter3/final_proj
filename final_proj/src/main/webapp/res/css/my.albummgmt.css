@@ -1,0 +1,67 @@
+.my-albummgmt-contents-wrap {
+    width: 100%;
+}
+
+.my-albummgmt-title-wrap {
+    height: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#my-albummgmt-title-no, .my-albummgmt-no {
+    padding-right: 5px;
+    text-align: center;
+    width: 65px;
+}
+
+#my-albummgmt-title-thumb {
+    width: 60px;
+}
+
+#my-albummgmt-title-albuminfo, .my-albummgmt-albuminfo {
+    padding-left: 12px;
+/*    width: 340px;*/
+    width: 300px;
+}
+
+#my-albummgmt-title-genre, .my-albummgmt-genre {
+    padding-left: 12px;
+    width: 100px;
+}
+
+#my-albummgmt-title-agency, .my-albummgmt-agency {
+    padding-left: 20px;
+    width: 200px;
+}
+
+#my-albummgmt-title-releasedate, .my-albummgmt-releasedate {
+    padding-left: 12px;
+    width: 100px;
+}
+
+#my-albummgmt-title-like {
+    padding-left: 36px;
+    width: 135px;
+}
+
+.my-albummgmt-like {
+    padding-left: 18px;
+}
+
+#my-albummgmt-title-edit, #my-albummgmt-title-delete, .my-albummgmt-edit, .my-albummgmt-delete {
+    text-align: center;
+    width: 50px;
+}
+
+.my-albummgmt-editbtn, .my-albummgmt-deletebtn {
+    transform: scale(1.2);
+    border: none;
+    background-color: inherit;
+}
+
+.my-albummgmt-artist-row {
+    height: 85px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+
