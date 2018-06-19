@@ -51,11 +51,44 @@ body{
 .my-upload-img-div img,.my-upload-music-div textarea{
     width:300px;
     height:300px;
+    position:relative;
     display:inline-block;
 }
-.my-upload-music-div textarea{
+.my-upload-content-div2{
+    text-align:center;
+}
+.my-upload-content-div2 .my-upload-row{
+    margin:25px 0;
+}
+.my-upload-content-div2 .my-upload-row:first-child{
+    margin-top:0;
+}
+.my-upload-content-div2 .my-upload-label-wrap{
+    height:60px;
+    border:1px solid #a9a9a9;
+    width:727px;
+    vertical-align: middle;
+    margin-right:25px;
+}
+.my-upload-content-div2 .my-upload-label-wrap .my-upload-label{
+    display:table-cell;
+    height:60px;
+    vertical-align: middle;
+    padding:0 20px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    position:relative;
+    width:727px;
+    max-width:727px;
+    text-align: left;
+    font-weight:normal;
+}
+.my-upload-content-div2 textarea{
     resize:none;
     font-size:16px;
+    width:870px;
+    height:250px;
     padding:10px;
     outline:none;
 }
@@ -120,7 +153,7 @@ input.my-upload-input-radio{
     border-radius: 10px;
     padding: 0 20px;
     font-size:16px;
-    width: 310px;
+    width: 360px;
     height: 60px;
 }
 .my-upload-input:focus {

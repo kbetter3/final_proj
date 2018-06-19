@@ -69,4 +69,9 @@ public class AlbumDaoImpl implements AlbumDao {
 	public AlbumDto getByNo(int no) {
 		return sqlSession.selectOne("spring.repository.AlbumDao.getByNo", no);
 	}
+
+	@Override
+	public List<AlbumDto> getListByMemberId(String mId) {
+		return sqlSession.selectList("spring.repository.AlbumDao.getListByMemberId", mId);
+	}
 }

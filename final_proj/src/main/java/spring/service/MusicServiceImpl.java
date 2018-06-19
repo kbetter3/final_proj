@@ -77,4 +77,9 @@ public class MusicServiceImpl implements MusicService {
 		return jsonArr;
 	}
 
+	@Override
+	public List<MusicDto> getListByMemberId(String mId) {
+		return musicDao.getListByMemberId(mId);
+	}
+
 }

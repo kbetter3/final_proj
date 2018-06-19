@@ -18,6 +18,8 @@ public void insert(MusicDto musicDto);
 	public List<MusicDto> getListByGenre(String genre);
 	public List<MusicDto> getListByArtistNo(int artistNo);
 	
+	public List<MusicDto> getListByMemberId(String mId);
+	
 	public JSONArray getMusicChart(String type, int page);
 	
 	public MusicDto getByNo(int no);

@@ -44,4 +44,9 @@ public class AlbumServiceImpl implements AlbumService {
 		return albumDao.getByNo(no);
 	}
 
+	@Override
+	public List<AlbumDto> getListByMemberId(String mId) {
+		return albumDao.getListByMemberId(mId);
+	}
+
 }

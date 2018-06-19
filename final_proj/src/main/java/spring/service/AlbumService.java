@@ -13,5 +13,6 @@ public interface AlbumService {
 	public List<AlbumDto> getListByNmae(String name);
 	public List<AlbumDto> getListByArtistNo(int artistNo);
 	public List<AlbumDto> getListByGenre(String genre);
+	public List<AlbumDto> getListByMemberId(String mId);
 	public AlbumDto getByNo(int no);
 }

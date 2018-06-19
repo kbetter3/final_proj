@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.bean.RespState;
+import spring.service.PictureService;
 import spring.service.TagService;
 
 @Controller
@@ -34,6 +35,9 @@ public class UploaderController {
 	
 	@Autowired
 	private TagService tagService;
+	
+	@Autowired
+	private PictureService pictureService;
 	
 	@RequestMapping(method= {RequestMethod.GET}, value= {"/uploader/config"})
 	public String homoe() {
@@ -44,21 +48,22 @@ public class UploaderController {
 	@RequestMapping("/pictest")
 	@ResponseBody
 	public ResponseEntity<String> picupload(MultipartHttpServletRequest mRequest) throws IllegalStateException, IOException {
-		String dir = "C:/tempPic";
-		
-		MultipartFile mFile = mRequest.getFile("pic");
-		
-		String rname = System.currentTimeMillis() + "-" + UUID.randomUUID();
-		String fname = mFile.getOriginalFilename();
-		long fsize = mFile.getSize();
-		String ftype = mFile.getContentType();
-		File target = new File(dir, rname);
-		
-		mFile.transferTo(target);
+//		String dir = "D:/tempPic";
+//		
+//		MultipartFile mFile = mRequest.getFile("pic");
+//		
+//		String rname = System.currentTimeMillis() + "-" + UUID.randomUUID();
+//		String fname = mFile.getOriginalFilename();
+//		long fsize = mFile.getSize();
+//		String ftype = mFile.getContentType();
+//		File target = new File(dir, rname);
+//		
+//		mFile.transferTo(target);
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("state", RespState.DATA);
-		jobj.put("data", rname);
+		jobj.put("data", pictureService.saveTempPic(mRequest.getFile("pic")));
+//		jobj.put("data", rname);
 		
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}
@@ -66,17 +71,7 @@ public class UploaderController {
 	@RequestMapping("/pictest2")
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> pictest2(String fname, HttpServletResponse response) throws IOException {
-		StringBuffer picData = new StringBuffer("");
-		
-		File f = new File("c:/tempPic", fname);
-		
-		byte[] data = FileUtils.readFileToByteArray(f);
-		ByteArrayResource resource = new ByteArrayResource(data);
-		
-		log.debug("picdata = {}", picData.toString());
-		
-//		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg; charset=UTF-8").body(picData.toString());
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(resource);
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadTempPic(fname));
 	}
 	
 }

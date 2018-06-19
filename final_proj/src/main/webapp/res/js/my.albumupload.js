@@ -5,9 +5,10 @@ function my_albumupload_load(){
         type:"GET",
         success:my_albumupload_success_load
     });
-    
+
     $( function() {
         $( "#my-upload-album-launch" ).datepicker();
+        $("#my-upload-album-picture").on("change", my_albumupload_picture_select);
         $(".my-upload-submit-button").on("click", my_albumupload_upload);
     } );
 }
@@ -26,20 +27,29 @@ function my_albumupload_success_load(jobj){
     })
 }
 
-function my_albumupload_picture_select() {
+function my_albumupload_picture_select(e) {
 //    var formData = new FormData($("#upload-form")[0]);
-    var formData = new FormData();
-    formData.append("pic", $(this)[0].files[0]);
+    var filename = $(e.currentTarget).val();
 
-    $.ajax({
-        url: "pictest",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        type: "POST",
-        success: my_albumupload_success_picture_select
-    });
+    if(filename.match(/(.jpg|.jpeg|.png|.gif)$/)){
+
+        var formData = new FormData();
+        formData.append("pic", $(this)[0].files[0]);
+
+        $.ajax({
+            url: "pictest",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: my_albumupload_success_picture_select
+        });
+    }else{
+        $("#my-upload-album-img").removeAttr("src")
+        $(e.currentTarget).val("")
+        alert("이미지(jpg, jpeg, png, gif) 파일만 업로드 가능합니다.")
+    }
 }
 
 function my_albumupload_success_picture_select(jobj) {
@@ -56,12 +66,12 @@ function my_albumupload_upload() {
     var launch = $("#my-upload-album-launch");
     var genre = $("#my-upload-album-genre");
     var company = $("#my-upload-album-company");
-    var thumb = $("#my-upload-album-img");
+    var thumb = $("#my-upload-album-picture");
 
     var bname = name.val().length > 0 ? true : false;
     var bartist = artist.val()!=null ? true : false;
     var blaunch = launch.val().length > 0 ? true : false;
-    var bthumb = thumb[0].files[0] != undefined ? true : false;
+    var bthumb = thumb.val() != "" ? true : false;
 
 
 
@@ -80,7 +90,7 @@ function my_albumupload_upload() {
         console.log(bname);
         console.log(bartist);
         console.log(blaunch);
-        console.log(bthumg);
+        console.log(bthumb);
     }
 }
 

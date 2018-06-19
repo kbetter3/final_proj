@@ -6,7 +6,7 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into music(no, name, albumNo, lyrics, releaseDate, genre, artistNo, thumb, regDate, mId) values(
+		insert into music(no, name, albumNo, lyrics, releaseDate, genre, artistNo, thumb, regDate, mId, loc) values(
 		music_seq.nextval,
 		#{name},
 		#{albumNo},
@@ -16,7 +16,8 @@
 		#{artistNo},
 		#{thumb},
 		sysdate,
-		#{mid}
+		#{mid},
+		#{loc}
 		)
 	</insert>
 	
@@ -46,6 +47,10 @@
 	
 	<select id="getByNo" resultType="musicDto" parameterType="int">
 		select * from music where no=#{no}
+	</select>
+	
+	<select id="getListByMemberId" resultType="musicDto" parameterType="string">
+		select * from music where mid=#{mid}
 	</select>
 	
 	

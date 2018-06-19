@@ -16,7 +16,9 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import spring.bean.AlbumDto;
 import spring.bean.ArtistDto;
 import spring.bean.GenreDto;
+import spring.bean.MusicDto;
 import spring.bean.RespState;
 import spring.service.AlbumService;
 import spring.service.ArtistService;
@@ -181,8 +184,10 @@ public class SubmenuController {
 			}
 			
 			for (ArtistDto artist : artistList) {
-				JSONObject artistObj = new JSONObject();
+				artistArr.put(artist.convertToJSON());
 			}
+			
+			jobj.put("artist", artistArr);
 			
 			return tagService.getEmptyResponse().body(jobj.toString());
 		} else {
@@ -229,8 +234,33 @@ public class SubmenuController {
 	
 	@RequestMapping("/mgmt/albumcont")
 	@ResponseBody
-	public ResponseEntity<String> artistcont() {
+	public ResponseEntity<String> albumcont(HttpSession session) {
 		JSONObject jobj = new JSONObject();
+		
+		List<AlbumDto> albumList;
+		
+		switch ((int)session.getAttribute("upower")) {
+		case 2:
+			albumList = albumService.getListByMemberId((String)session.getAttribute("uid"));
+			break;
+			
+		case 9:
+			albumList = albumService.getList();
+			break;
+			
+		default:
+			jobj.put("state", RespState.MESSAGE);
+			jobj.put("msg", "권한이 없음");
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
+		
+		JSONArray albumArr = new JSONArray();
+		for (AlbumDto album : albumList) {
+			albumArr.put(album.convertToJSON());
+		}
+		
+		jobj.put("state", RespState.DATA);
+		jobj.put("album", albumArr);
 		
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}
@@ -250,10 +280,10 @@ public class SubmenuController {
 		albumDto.setGenre(albumgenre);
 		albumDto.setAgency(albumcompany);
 		albumDto.setReleaseDate(albumlaunch);
+		albumDto.setMId((String)session.getAttribute("uid"));
 		albumDto.setThumb(pictureService.saveAlbumPic(mRequest.getFile("albumpicture")));
 		
-		log.debug("albumupload - {}", albumDto);
-//		albumService.insert(albumDto);
+		albumService.insert(albumDto);
 		
 		JSONObject jobj = new JSONObject();
 		jobj.put("state", RespState.SUCCESS);
@@ -270,8 +300,33 @@ public class SubmenuController {
 	
 	@RequestMapping("/mgmt/musiccont")
 	@ResponseBody
-	public ResponseEntity<String> musiccont() {
+	public ResponseEntity<String> musiccont(HttpSession session) {
 		JSONObject jobj = new JSONObject();
+		
+		List<MusicDto> musicList;
+		switch ((int)session.getAttribute("upower")) {
+		case 2:
+			musicList = musicService.getListByMemberId((String)session.getAttribute("uid"));
+			break;
+			
+		case 9:
+			musicList = musicService.getList();
+			break;
+			
+		default:
+			jobj.put("state", RespState.MESSAGE);
+			jobj.put("msg", "권한이 없습니다.");
+			return tagService.getEmptyResponse().body(jobj.toString());
+	
+		}
+		
+		JSONArray musicArr = new JSONArray();
+		for (MusicDto music : musicList) {
+			musicArr.put(music.convertToJSON());
+		}
+		
+		jobj.put("state", RespState.DATA);
+		jobj.put("music", musicArr);
 		
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}
@@ -280,6 +335,25 @@ public class SubmenuController {
 	@ResponseBody
 	public ResponseEntity<String> musicuploadTag() throws IOException {
 		return tagService.getTag("musicupload.txt");
+	}
+	
+	@PostMapping("/mgmt/musicupload")
+	@ResponseBody
+	public ResponseEntity<String> musicupload(String musicname, int musicalbum, String musiclaunch, String musicgenre, String musictype, String musiclyrics, MultipartHttpServletRequest mRequest, HttpSession session) {
+		MusicDto musicDto = new MusicDto();
+		
+		musicDto.setName(musicname);
+		musicDto.setAlbumNo(musicalbum);
+		musicDto.setReleaseDate(musiclaunch);
+		musicDto.setGenre(musicgenre);
+		musicDto.setLoc(musictype);
+		musicDto.setLyrics(musiclyrics);
+		musicDto.setMFile(mRequest.getFile("musicmusic").getOriginalFilename());
+		
+		
+		log.debug("music : {}", musicDto);
+		
+		return null;
 	}
 	
 	
@@ -311,6 +385,42 @@ public class SubmenuController {
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 	
+	// music select 메뉴 내려주기
+	@RequestMapping("/mgmt/musicselectitem")
+	@ResponseBody
+	public ResponseEntity<String> musicselectitem(HttpSession session) {
+		List<AlbumDto> albumList = albumService.getListByMemberId((String)session.getAttribute("uid"));
+		JSONArray albumArr = new JSONArray();
+		for (AlbumDto album : albumList) {
+			JSONObject albumObj = new JSONObject();
+			albumObj.put("albumno", album.getNo());
+			albumObj.put("albumname", album.getName());
+			albumObj.put("thumb", album.getThumb());
+			
+			albumArr.put(albumObj);
+		}
+		
+		List<GenreDto> genreList = genreService.getList();
+		JSONArray genreArr = new JSONArray();
+		for (GenreDto genre : genreList) {
+			genreArr.put(genre.getGenre());
+		}
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.DATA);
+		jobj.put("album", albumArr);
+		jobj.put("genre", genreArr);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
+	
+	
+	// Album Thumb 내려주기
+	@RequestMapping("/albumthumb")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> albumthumbpic(String fname) throws IOException {
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadAlbumPic(fname));
+	}
 	
 	@RequestMapping("/getmusic")
 	@ResponseBody

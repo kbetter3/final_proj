@@ -9,18 +9,27 @@ function my_artistupload_radio() {
 
 function my_artistupload_picture_select() {
 //    var formData = new FormData($("#upload-form")[0]);
-    var formData = new FormData();
-    formData.append("pic", $(this)[0].files[0]);
+    var filename = $(e.currentTarget).val();
 
-    $.ajax({
-        url: "pictest",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        type: "POST",
-        success: my_artistupload_success_picture_select
-    });
+    if(filename.match(/(.jpg|.jpeg|.png|.gif)$/)){
+
+        var formData = new FormData();
+        formData.append("pic", $(this)[0].files[0]);
+
+        $.ajax({
+            url: "pictest",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: my_artistupload_success_picture_select
+        });
+    }else{
+        $("#my-upload-artist-img").removeAttr("src")
+        $(e.currentTarget).val("")
+        alert("이미지(jpg, jpeg, png, gif) 파일만 업로드 가능합니다.")
+    }
 }
 
 function my_artistupload_success_picture_select(jobj) {
@@ -35,17 +44,18 @@ function my_artistupload_upload() {
     var name = $("#my-upload-artist-name");
     var member = $("#my-upload-artist-member");
     var debutdate = $("#my-upload-artist-debut");
-    var activitytype = $(".my-upload-input-radio[checked=checked]");
+    var activitytype = $(".my-upload-input-radio:checked");
     var thumb = $("#my-upload-artist-picture");
 
     var bname = name.val().length > 0 ? true : false;
     var bmember = member.val().length > 0 ? true : false;
     var bdebutdate = debutdate.val().length > 0 ? true : false;
-    var bthumb = thumb[0].files[0] != undefined ? true : false;
+    var bactivitytype = activitytype.length > 0 ? true : false;
+    var bthumb = thumb.val() != "" ? true : false;
 
 
 
-    if (bname && bmember && bdebutdate && bthumb) {
+    if (bname && bmember && bdebutdate && bactivitytype && bthumb) {
         var formData = new FormData($("form")[0]);
 
         $.ajax({

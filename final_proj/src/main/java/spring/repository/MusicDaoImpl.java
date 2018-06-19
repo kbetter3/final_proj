@@ -38,11 +38,13 @@ public class MusicDaoImpl implements MusicDao {
 		map.put("genre", musicDto.getGenre());
 		map.put("artistNo", musicDto.getArtistNo());
 		
-		if (musicDto.getThumb() != null) {
-			map.put("thumb", musicDto.getThumb());
+		if (musicDto.getMFile() != null) {
+			map.put("mfile", musicDto.getMFile());
 		} else {
-			map.put("thumb", "");
+			map.put("mfile", "");
 		}
+		
+		map.put("loc", musicDto.getLoc());
 		
 		sqlSession.insert("spring.repository.MusicDao.insert", map);
 	}
@@ -89,6 +91,11 @@ public class MusicDaoImpl implements MusicDao {
 	@Override
 	public MusicDto getByNo(int no) {
 		return sqlSession.selectOne("spring.repository.MusicDao.getByNo", no);
+	}
+
+	@Override
+	public List<MusicDto> getListByMemberId(String mId) {
+		return sqlSession.selectList("spring.repository.MusicDao.getListByMemberId", mId);
 	}
 
 }

@@ -6,14 +6,14 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into Album(no, name, artistNo, releaseDate, genre, agency, thumb, regDate, mId) values(
+		insert into Album(no, name, artistNo, releaseDate, genre, agency, mfile, regDate, mId) values(
 		album_seq.nextval,
 		#{name},
 		#{artistNo},
 		to_date(#{releaseDate}, 'mm/dd/yyyy'),
 		#{genre},
 		#{agency},
-		#{thumb},
+		#{mfile},
 		sysdate,
 		#{mid}
 		)
@@ -37,5 +37,9 @@
 	
 	<select id="getByNo" resultType="albumDto" parameterType="int">
 		select * from album where no=#{no}
+	</select>
+	
+	<select id="getListByMemberId" resultType="albumDto" parameterType="string">
+		select * from album where mid=#{mId}
 	</select>
 </mapper>

@@ -17,9 +17,10 @@ public class MusicDto {
 	private int likeCount;
 	private int playCount;
 	private int downCount;
-	private String thumb;
+	private String mFile;
 	private String regDate;
 	private String mId;
+	private String loc;
 	
 	public JSONObject convertToJSON() {
 		JSONObject jobj = new JSONObject();
@@ -29,16 +30,19 @@ public class MusicDto {
 		}
 		
 		jobj.put("name", this.name);
-		jobj.put("albumNo", this.albumNo);
+		jobj.put("albumno", this.albumNo);
 		jobj.put("lyrics", this.lyrics);
-		jobj.put("releaseDate", this.releaseDate);
-//		jobj.put("genre", this.genre);
-		jobj.put("artistNo", this.artistNo);
+		jobj.put("releasedate", this.releaseDate);
+		jobj.put("genre", this.genre);
+//		jobj.put("artistNo", this.artistNo);
 		jobj.put("statement", this.statement);
-		jobj.put("likeCount", this.likeCount);
-		jobj.put("playCount", this.playCount);
-		jobj.put("downCount", this.downCount);
-		jobj.put("thumb", this.thumb);
+		jobj.put("likecount", this.likeCount);
+		jobj.put("playcount", this.playCount);
+		jobj.put("downcount", this.downCount);
+		jobj.put("mFile", this.mFile);
+		jobj.put("regdate", this.regDate);
+		jobj.put("mid", this.mId);
+		jobj.put("loc", this.loc);
 		
 		return jobj;
 	}
