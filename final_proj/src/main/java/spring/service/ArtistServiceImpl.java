@@ -28,10 +28,14 @@ public class ArtistServiceImpl implements ArtistService {
 	public ArtistDto getByNo(int no) {
 		return artistDao.getByNo(no);
 	}
+	
+	@Override
+	public List<ArtistDto> getListByMemberId(String mId) {
+		return artistDao.getListByMemberId(mId);
+	}
 
 	@Override
 	public List<ArtistDto> getListByName(String name) {
 		return artistDao.getListByName(name);
 	}
-
 }

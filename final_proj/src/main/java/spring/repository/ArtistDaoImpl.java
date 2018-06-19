@@ -58,5 +58,10 @@ public class ArtistDaoImpl implements ArtistDao {
 	public List<ArtistDto> getListByName(String name) {
 		return sqlSession.selectList("spring.repository.ArtistDao.getListByName", name);
 	}
+
+	@Override
+	public List<ArtistDto> getListByMemberId(String mId) {
+		return sqlSession.selectList("spring.repository.ArtistDao.getListByMemberId", mId);
+	}
 	 
 }

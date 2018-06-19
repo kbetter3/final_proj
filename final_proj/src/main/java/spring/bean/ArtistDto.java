@@ -1,5 +1,7 @@
 package spring.bean;
 
+import org.json.JSONObject;
+
 import lombok.Data;
 
 @Data
@@ -14,4 +16,21 @@ public class ArtistDto {
 	private int likeCount;			/* default 0 */
 	private String regDate;
 	private String mId;
+	
+	public JSONObject convertToJSON() {
+		JSONObject jobj = new JSONObject();
+		
+		jobj.put("no", this.no);
+		jobj.put("name", this.name);
+		jobj.put("member", this.member);
+		jobj.put("debutdate", this.debutDate);
+		jobj.put("activitytype", this.activityType);
+		jobj.put("agency", this.agency);
+		jobj.put("thumb", this.thumb);
+		jobj.put("likecount", this.likeCount);
+		jobj.put("regdate", this.regDate);
+		jobj.put("mid", this.mId);
+		
+		return jobj;
+	}
 }

@@ -10,7 +10,7 @@
 		album_seq.nextval,
 		#{name},
 		#{artistNo},
-		to_date(#{releaseDate}, 'yyyy/mm/dd'),
+		to_date(#{releaseDate}, 'mm/dd/yyyy'),
 		#{genre},
 		#{agency},
 		#{thumb},

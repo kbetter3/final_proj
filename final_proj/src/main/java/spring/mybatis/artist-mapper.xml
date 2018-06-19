@@ -10,7 +10,7 @@
 		artist_seq.nextval,
 		#{name},
 		#{member},
-		to_date(#{debutDate}, 'yyyy/mm/dd'),
+		to_date(#{debutDate}, 'mm/dd/yyyy'),
 		#{activityType},
 		#{agency},
 		#{thumb},
@@ -29,6 +29,10 @@
 	
 	<select id="getListByName" resultType="artistDto" parameterType="string">
 		select * from artist where name like '%'||#{name}||'%'
+	</select>
+	
+	<select id="getListByMemberId" resultType="artistDto" parameterType="string">
+		select * from artist where mid=#{mId}
 	</select>
 	
 </mapper>

@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +23,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import spring.bean.AlbumDto;
+import spring.bean.ArtistDto;
+import spring.bean.GenreDto;
 import spring.bean.RespState;
+import spring.service.AlbumService;
+import spring.service.ArtistService;
+import spring.service.GenreService;
 import spring.service.MusicService;
+import spring.service.PictureService;
 import spring.service.TagService;
 
 @Controller
@@ -33,10 +43,22 @@ public class SubmenuController {
 	private String submenuDir = "submenu\\";
 	
 	@Autowired
+	private ArtistService artistService;
+	
+	@Autowired
+	private AlbumService albumService;
+	
+	@Autowired
 	private MusicService musicService;
 	
 	@Autowired
 	private TagService tagService;
+	
+	@Autowired
+	private PictureService pictureService;
+	
+	@Autowired
+	private GenreService genreService;
 	
 	@RequestMapping("/header")
 	@ResponseBody
@@ -141,16 +163,25 @@ public class SubmenuController {
 		
 		if (session.getAttribute("uid") != null) {
 			// 로그인한 사용자가 접근한 경우
+			List<ArtistDto> artistList;
+			JSONArray artistArr = new JSONArray();
+			
 			switch ((int)session.getAttribute("upower")) {
 			case 2:
 				// 업로더가 요청한 경우
+				artistList = artistService.getListByMemberId((String)session.getAttribute("uid"));
 				break;
 			case 9:
 				// 관리자가 요청한 경우
+				artistList = artistService.getList();
 				break;
 			default:
 				// 비정상 요청 - 권한이 없는 사용자의 요청
-				break;
+				return tagService.getEmptyResponse().body(jobj.toString());
+			}
+			
+			for (ArtistDto artist : artistList) {
+				JSONObject artistObj = new JSONObject();
 			}
 			
 			return tagService.getEmptyResponse().body(jobj.toString());
@@ -166,6 +197,28 @@ public class SubmenuController {
 		return tagService.getTag("artistupload.txt");
 	}
 	
+	
+	@PostMapping("/mgmt/artistupload")
+	@ResponseBody
+	public ResponseEntity<String> artistupload(String artistname, String artistmember, String artistdebut, String artisttype, String artistcompany, MultipartHttpServletRequest mRequest, HttpSession session) throws IllegalStateException, IOException {
+		ArtistDto artistDto = new ArtistDto();
+		artistDto.setName(artistname);
+		artistDto.setMember(artistmember);
+		artistDto.setActivityType(artisttype);
+		artistDto.setAgency(artistcompany);
+		artistDto.setDebutDate(artistdebut);
+		artistDto.setThumb(pictureService.saveArtistPic(mRequest.getFile("artistpicture")));
+		artistDto.setMId((String)session.getAttribute("uid"));
+		
+		log.debug("artistdto : {}", artistDto);
+		
+		artistService.insert(artistDto);
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.SUCCESS);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
 	
 	
 	@RequestMapping("/mgmt/albummgmt")
@@ -183,10 +236,30 @@ public class SubmenuController {
 	}
 	
 	@GetMapping("/mgmt/albumupload")
+	@ResponseBody
 	public ResponseEntity<String> albumuploadTag() throws IOException {
 		return tagService.getTag("albumupload.txt");
 	}
-	
+
+	@PostMapping("/mgmt/albumupload")
+	@ResponseBody
+	public ResponseEntity<String> albumupload(String albumname, int albumartist, String albumlaunch, String albumgenre, String albumcompany, MultipartHttpServletRequest mRequest, HttpSession session) throws IllegalStateException, IOException {
+		AlbumDto albumDto = new AlbumDto();
+		albumDto.setName(albumname);
+		albumDto.setArtistNo(albumartist);
+		albumDto.setGenre(albumgenre);
+		albumDto.setAgency(albumcompany);
+		albumDto.setReleaseDate(albumlaunch);
+		albumDto.setThumb(pictureService.saveAlbumPic(mRequest.getFile("albumpicture")));
+		
+		log.debug("albumupload - {}", albumDto);
+//		albumService.insert(albumDto);
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.SUCCESS);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
 	
 	
 	@RequestMapping("/mgmt/musicmgmt")
@@ -209,6 +282,34 @@ public class SubmenuController {
 		return tagService.getTag("musicupload.txt");
 	}
 	
+	
+	// album select 메뉴 내려주기
+	@RequestMapping("/mgmt/albumselectitem")
+	@ResponseBody
+	public ResponseEntity<String> albumselectitem(HttpSession session) {
+		List<ArtistDto> artistList = artistService.getListByMemberId((String)session.getAttribute("uid"));
+		JSONArray artistArr = new JSONArray();
+		for (ArtistDto artist : artistList) {
+			JSONObject artistObj = new JSONObject();
+			artistObj.put("artistno", artist.getNo());
+			artistObj.put("artistname", artist.getName());
+			
+			artistArr.put(artistObj);
+		}
+		
+		List<GenreDto> genreList = genreService.getList();
+		JSONArray genreArr = new JSONArray();
+		for (GenreDto genre : genreList) {
+			genreArr.put(genre.getGenre());
+		}
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.DATA);
+		jobj.put("artist", artistArr);
+		jobj.put("genre", genreArr);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
 	
 	
 	@RequestMapping("/getmusic")
