@@ -98,6 +98,6 @@ function my_musicupload_upload() {
 
 function my_musicupload_success_musicupload(jobj) {
     if (jobj.state == RespState.success) {
-        console.log("musicupload 성공했다 musicmgmt로 보내라");
+        my_mgmt_musicupload();
     }
 }

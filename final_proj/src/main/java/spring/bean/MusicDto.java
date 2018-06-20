@@ -39,7 +39,7 @@ public class MusicDto {
 		jobj.put("likecount", this.likeCount);
 		jobj.put("playcount", this.playCount);
 		jobj.put("downcount", this.downCount);
-		jobj.put("mFile", this.mFile);
+		jobj.put("mfile", this.mFile);
 		jobj.put("regdate", this.regDate);
 		jobj.put("mid", this.mId);
 		jobj.put("loc", this.loc);

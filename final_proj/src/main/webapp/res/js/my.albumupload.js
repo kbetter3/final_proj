@@ -96,6 +96,6 @@ function my_albumupload_upload() {
 
 function my_albumupload_success_albumupload(jobj) {
     if (jobj.state == RespState.success) {
-        console.log("albumupload 성공했다 albummgmt로 보내라");
+        my_mgmt_albummgmt();
     }
 }

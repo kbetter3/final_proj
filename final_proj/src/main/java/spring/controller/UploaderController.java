@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import spring.bean.AlbumDto;
 import spring.bean.RespState;
+import spring.service.AlbumService;
 import spring.service.PictureService;
 import spring.service.TagService;
 
@@ -37,11 +39,26 @@ public class UploaderController {
 	private TagService tagService;
 	
 	@Autowired
+	private AlbumService albumService;
+	
+	@Autowired
 	private PictureService pictureService;
 	
 	@RequestMapping(method= {RequestMethod.GET}, value= {"/uploader/config"})
 	public String homoe() {
 		return "uploader/config";
+	}
+	
+	@RequestMapping("/mgmt/albumname")
+	@ResponseBody
+	public ResponseEntity<String> albumname(int albumno) {
+		AlbumDto albumDto = albumService.getByNo(albumno);
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.DATA);
+		jobj.put("albumname", albumDto.getName());
+		jobj.put("albumthumb", albumDto.getThumb());
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 	
 	
@@ -62,9 +79,15 @@ public class UploaderController {
 	}
 	
 	
-	@RequestMapping("/artistpic")
+	@RequestMapping("/mgmt/artistpic")
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> artistPic(String fname) throws IOException {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadArtistPic(fname));
+	}
+	
+	@RequestMapping("/mgmt/albumpic")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> albumPic(String fname) throws IOException {
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadAlbumPic(fname));
 	}
 }
