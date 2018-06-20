@@ -53,10 +53,13 @@
 		select * from music where mid=#{mid}
 	</select>
 	
-	
+	<select id="getListByLoc" resultType="musicDto" parameterType="string">
+		select * from music where loc=#{loc}
+	</select>
 	
 	
 	<select id="getMusicChartOrderByPlayCount" resultType="musicDto" parameterType="int">
 		select * from music order by playcount
 	</select>
+	
 </mapper>

@@ -283,6 +283,8 @@ public class SubmenuController {
 		albumDto.setMId((String)session.getAttribute("uid"));
 		albumDto.setThumb(pictureService.saveAlbumPic(mRequest.getFile("albumpicture")));
 		
+		log.debug("albumDto = {}", albumDto);
+		
 		albumService.insert(albumDto);
 		
 		JSONObject jobj = new JSONObject();

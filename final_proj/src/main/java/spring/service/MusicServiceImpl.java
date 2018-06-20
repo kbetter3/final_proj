@@ -2,6 +2,7 @@ package spring.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,9 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import spring.bean.MainDirectory;
 import spring.bean.MusicDto;
+import spring.bean.MusicPlayGroupDto;
 import spring.bean.SubmenuType;
 import spring.repository.AlbumDao;
 import spring.repository.MusicDao;
+import spring.repository.MusicPlayGroupDao;
 
 @Service("musicService")
 public class MusicServiceImpl implements MusicService {
@@ -25,6 +28,9 @@ public class MusicServiceImpl implements MusicService {
 	
 	@Autowired
 	private AlbumDao albumDao;
+	
+	@Autowired
+	private MusicPlayGroupDao musicPlayGroupDao;
 	
 	@Override
 	public void insert(MusicDto musicDto) {
@@ -71,9 +77,33 @@ public class MusicServiceImpl implements MusicService {
 		JSONArray jsonArr = new JSONArray();
 		
 		List<MusicDto> list = null;
+		
 		if (type.equals(SubmenuType.CHART_REALTIME)) {
 			list = musicDao.getMusicChartOrderByPlayCount(page);			
 		} else if (type.equals(SubmenuType.CHART_MONTHLY)) {
+			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateMonthly());
+		} else if (type.equals(SubmenuType.CHART_WEEKLY)) {
+			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateWeekly());
+		} else if (type.equals(SubmenuType.CHART_DAILY)) {
+			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateDaily());
+		} else if (type.equals(SubmenuType.LASTEST_DOM)) {
+			list = musicDao.getListByLoc("dom");
+		} else if (type.equals(SubmenuType.LASTEST_INT)) {
+			list = musicDao.getListByLoc("int");
+		} else if (type.equals(SubmenuType.GENRE_BALLAD)) {
+			list = musicDao.getListByGenre("발라드");
+		} else if (type.equals(SubmenuType.GENRE_DANCE)) {
+			list = musicDao.getListByGenre("댄스");
+		} else if (type.equals(SubmenuType.GENRE_HIPHOP)) {
+			list = musicDao.getListByGenre("랩/힙합");
+		} else if (type.equals(SubmenuType.GENRE_INDIE)) {
+			list = musicDao.getListByGenre("인디음악");
+		} else if (type.equals(SubmenuType.GENRE_ROCK)) {
+			list = musicDao.getListByGenre("록/메탈");
+		} else if (type.equals(SubmenuType.GENRE_TEUROTEU)) {
+			list = musicDao.getListByGenre("트로트");
+		} else if (type.equals(SubmenuType.GENRE_RNB)) {
+			list = musicDao.getListByGenre("R&B");
 		}
 		
 		if (list != null) {
@@ -107,4 +137,14 @@ public class MusicServiceImpl implements MusicService {
 		return rname;
 	}
 
+	
+	private List<MusicDto> getListByPlayCount(List<MusicPlayGroupDto> mList) {
+		List<MusicDto>list = new ArrayList<MusicDto>();
+
+		for (MusicPlayGroupDto mpgDto : mList) {
+			list.add(musicDao.getByNo(mpgDto.getMusicno()));
+		}
+		
+		return list;
+	}
 }

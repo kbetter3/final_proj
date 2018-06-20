@@ -24,7 +24,25 @@ function my_mgmt_artistcont() {
 }
 
 function my_mgmt_success_artistcont(jobj) {
-    console.log("로드되었음");
+    var artist = jobj.artist;
+    
+    console.log("artist : " + artist.length);
+    
+    
+    for (var i = 0; i < artist.length; i++) {
+        console.log("aaa");
+        var artistrow = $("#my-artistmgmt-artist-row").clone(true, true);
+        artistrow.find(".my-artistmgmt-no").text(i + 1);
+        artistrow.find("img").attr("src", "artistpic?fname=" + artist[i].thumb);
+        artistrow.find(".my-artistmgmt-name").text(artist[i].name);
+        artistrow.find(".my-artistmgmt-member").text(artist[i].member);
+        artistrow.find(".my-artistmgmt-activitytype").text(artist[i].activitytype);
+        artistrow.find(".my-artistmgmt-agency").text(artist[i].agency);
+        artistrow.find(".my-artistmgmt-debutdate").text(artist[i].debutdate);
+        artistrow.find(".my-artistmgmt-likecount").text(artist[i].likecount);
+        
+        $(".my-artistmgmt-contents").append(artistrow.show());
+    }
 }
 
 

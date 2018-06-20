@@ -16,6 +16,7 @@ public interface MusicDao {
 	public List<MusicDto> getListByAlbumNo(int albumNo);
 	public List<MusicDto> getListByGenre(String genre);
 	public List<MusicDto> getListByArtistNo(int artistNo);
+	public List<MusicDto> getListByLoc(String loc);
 	
 	public List<MusicDto> getListByMemberId(String mId);
 	

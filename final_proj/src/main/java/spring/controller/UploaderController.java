@@ -61,4 +61,10 @@ public class UploaderController {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadTempPic(fname));
 	}
 	
+	
+	@RequestMapping("/artistpic")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> artistPic(String fname) throws IOException {
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadArtistPic(fname));
+	}
 }

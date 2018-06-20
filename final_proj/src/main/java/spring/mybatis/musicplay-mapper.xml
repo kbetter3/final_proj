@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.MusicPlayDao">
+	<!-- Database 명령 작성 -->
+	
+	<insert id="insert" parameterType="map">
+		insert into musicplay(musicno, mid, playdate) values(
+		#{musicno},
+		#{mId},
+		sysdate
+		)
+	</insert>
+</mapper>

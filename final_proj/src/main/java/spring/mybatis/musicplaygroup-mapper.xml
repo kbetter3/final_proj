@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.MusicPlayGroupDao">
+	<!-- Database 명령 작성 -->
+	
+	<select id="getListByPlayDateMonthly" resultType="musicPlayGroupDto">
+		select musicno, count(*) cnt from musicplay where playdate between add_months(sysdate, -1) and sysdate group by musicno order by cnt desc
+	</select>
+	
+	<select id="getListByPlayDateWeekly" resultType="musicPlayGroupDto">
+		select musicno, count(*) cnt from musicplay where playdate between (sysdate - 7) and sysdate group by musicno order by cnt desc
+	</select>
+	
+	<select id="getListByPlayDateDaily" resultType="musicPlayGroupDto">
+		select musicno, count(*) cnt from musicplay where playdate between (sysdate - 1) and sysdate group by musicno order by cnt desc
+	</select>
+</mapper>

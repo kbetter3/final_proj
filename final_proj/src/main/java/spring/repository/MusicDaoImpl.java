@@ -98,4 +98,9 @@ public class MusicDaoImpl implements MusicDao {
 		return sqlSession.selectList("spring.repository.MusicDao.getListByMemberId", mId);
 	}
 
+	@Override
+	public List<MusicDto> getListByLoc(String loc) {
+		return sqlSession.selectList("spring.repository.MusicDao.getListByLoc", loc);
+	}
+
 }
