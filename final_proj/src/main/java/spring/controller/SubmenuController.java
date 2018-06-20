@@ -339,21 +339,25 @@ public class SubmenuController {
 	
 	@PostMapping("/mgmt/musicupload")
 	@ResponseBody
-	public ResponseEntity<String> musicupload(String musicname, int musicalbum, String musiclaunch, String musicgenre, String musictype, String musiclyrics, MultipartHttpServletRequest mRequest, HttpSession session) {
+	public ResponseEntity<String> musicupload(String musicname, int musicalbum, String musiclaunch, String musicgenre, String musictype, String musiclyrics, MultipartHttpServletRequest mRequest, HttpSession session) throws IllegalStateException, IOException {
 		MusicDto musicDto = new MusicDto();
 		
 		musicDto.setName(musicname);
 		musicDto.setAlbumNo(musicalbum);
+		musicDto.setArtistNo(albumService.getByNo(musicalbum).getArtistNo());
 		musicDto.setReleaseDate(musiclaunch);
 		musicDto.setGenre(musicgenre);
 		musicDto.setLoc(musictype);
 		musicDto.setLyrics(musiclyrics);
-		musicDto.setMFile(mRequest.getFile("musicmusic").getOriginalFilename());
+		musicDto.setMFile(musicService.saveMusic(mRequest.getFile("musicmusic")));
+		musicDto.setMId((String)session.getAttribute("uid"));
 		
+		musicService.insert(musicDto);
 		
-		log.debug("music : {}", musicDto);
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.SUCCESS);
 		
-		return null;
+		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 	
 	
@@ -420,21 +424,5 @@ public class SubmenuController {
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> albumthumbpic(String fname) throws IOException {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadAlbumPic(fname));
-	}
-	
-	@RequestMapping("/getmusic")
-	@ResponseBody
-	public ResponseEntity<String> getMusic(String type, int page) {
-		JSONObject jobj = new JSONObject();
-		String msg = "";
-		jobj.put("state", RespState.SUCCESS);
-		
-		if (type == null) {
-			type = "chartrealtime";
-		}
-		
-		jobj.put("music", musicService.getMusicChart(type, page));
-		
-		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 }

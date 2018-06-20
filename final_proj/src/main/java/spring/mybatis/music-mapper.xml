@@ -6,15 +6,15 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into music(no, name, albumNo, lyrics, releaseDate, genre, artistNo, thumb, regDate, mId, loc) values(
+		insert into music(no, name, albumNo, lyrics, releaseDate, genre, artistNo, mfile, regDate, mId, loc) values(
 		music_seq.nextval,
 		#{name},
 		#{albumNo},
 		#{lyrics},
-		to_date(#{releaseDate}, 'yyyy/mm/dd'),
+		to_date(#{releaseDate}, 'mm/dd/yyyy'),
 		#{genre},
 		#{artistNo},
-		#{thumb},
+		#{mfile},
 		sysdate,
 		#{mid},
 		#{loc}

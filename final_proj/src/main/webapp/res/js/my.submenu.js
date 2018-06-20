@@ -15,21 +15,9 @@ function my_submenu_success_submenu(jobj) {
 }
 
 
-function my_submenu_getMusic() {
-    my_chart_chart();
-
-    $.ajax({
-        url: "getmusic",
-        data: {
-            type: $(this).attr("controller"),
-            page: 1
-        },
-        success: my_submenu_success_getMusic
-    });
-}
-
-function my_submenu_success_getMusic(jobj) {
-    console.log(jobj.music.length);
+// chartsubmenu item 선택시
+function my_submenu_changeSubmenu(target, pg) {
+    my_chart_chart($(this).attr("controller"), 1);
 }
 
 

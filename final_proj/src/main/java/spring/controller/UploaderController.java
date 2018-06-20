@@ -48,22 +48,9 @@ public class UploaderController {
 	@RequestMapping("/pictest")
 	@ResponseBody
 	public ResponseEntity<String> picupload(MultipartHttpServletRequest mRequest) throws IllegalStateException, IOException {
-//		String dir = "D:/tempPic";
-//		
-//		MultipartFile mFile = mRequest.getFile("pic");
-//		
-//		String rname = System.currentTimeMillis() + "-" + UUID.randomUUID();
-//		String fname = mFile.getOriginalFilename();
-//		long fsize = mFile.getSize();
-//		String ftype = mFile.getContentType();
-//		File target = new File(dir, rname);
-//		
-//		mFile.transferTo(target);
-		
 		JSONObject jobj = new JSONObject();
 		jobj.put("state", RespState.DATA);
 		jobj.put("data", pictureService.saveTempPic(mRequest.getFile("pic")));
-//		jobj.put("data", rname);
 		
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}

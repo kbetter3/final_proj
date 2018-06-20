@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.stereotype.Service;
 
+import spring.bean.MainDirectory;
 import spring.bean.RespState;
 
 @Service("tagService")
@@ -29,9 +30,9 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public ResponseEntity<String> getTag(String fname, String key, Object value) throws IOException {
 //		String fileDir = "C:\\tags\\";
-		String fileDir = "D:\\tags\\";
+		String fileDir = ":\\tags\\";
 //		String fileDir = "E:\\tags\\";
-		File target = new File(fileDir + fname);
+		File target = new File(MainDirectory.DIRECTORY + fileDir + fname);
 		FileInputStream fis = new FileInputStream(target);
 		InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
 		BufferedReader br = new BufferedReader(isr);

@@ -10,31 +10,32 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import spring.bean.MainDirectory;
 import spring.bean.RespState;
 
 @Service("pictureService")
 public class PictureServiceImpl implements PictureService {
 //	String fileDirPrefix = "C";
-	String fileDirPrefix = "D";
+//	String fileDirPrefix = "D";
 //	String fileDirPrefix = "E";
 	
 	@Override
 	public String saveTempPic(MultipartFile mFile) throws IllegalStateException, IOException {
-		String fileDir = fileDirPrefix + ":/tempPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/tempPic";
 		
 		return savePic(fileDir, mFile);
 	}
 
 	@Override
 	public String saveArtistPic(MultipartFile mFile) throws IllegalStateException, IOException {
-		String fileDir = fileDirPrefix + ":/artistPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/artistPic";
 		
 		return savePic(fileDir, mFile);
 	}
 
 	@Override
 	public String saveAlbumPic(MultipartFile mFile) throws IllegalStateException, IOException {
-		String fileDir = fileDirPrefix + ":/albumPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/albumPic";
 		
 		return savePic(fileDir, mFile);
 	}
@@ -50,27 +51,26 @@ public class PictureServiceImpl implements PictureService {
 		
 		mFile.transferTo(target);
 		
-		
 		return rname;
 	}
 
 	@Override
 	public ByteArrayResource loadTempPic(String filename) throws IOException {
-		String fileDir = fileDirPrefix + ":/tempPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/tempPic";
 		
 		return loadPic(fileDir, filename);
 	}
 
 	@Override
 	public ByteArrayResource loadArtistPic(String filename) throws IOException {
-		String fileDir = fileDirPrefix + ":/artistPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/artistPic";
 		
 		return loadPic(fileDir, filename);
 	}
 
 	@Override
 	public ByteArrayResource loadAlbumPic(String filename) throws IOException {
-		String fileDir = fileDirPrefix + ":/albumPic";
+		String fileDir = MainDirectory.DIRECTORY + ":/albumPic";
 		
 		return loadPic(fileDir, filename);
 	}

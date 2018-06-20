@@ -29,8 +29,29 @@ function my_chart_chart(target, page) {
         async: true,
         success: my_chart_success_chart
     });
+    
+    // 음원데이터를 내려받아 row채우기
+    my_chart_getMusic(target, page);
 }
 
 function my_chart_success_chart(jobj) {
     $("#my-contents-container").html("").append(jobj.tags);
+}
+
+
+function my_chart_getMusic(target, page) {
+    $.ajax({
+        url: "getmusic",
+        data: {
+            type: target,
+            pg: page
+        },
+        success: my_chart_success_getMusic
+    });
+}
+
+function my_chart_success_getMusic(jobj) {
+    var music = jobj.music;
+    
+    console.log(music.length);
 }

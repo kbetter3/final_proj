@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import spring.bean.RespState;
+import spring.service.MusicService;
 import spring.service.TagService;
 
 @Controller
@@ -28,6 +30,9 @@ public class ChartController {
 	@Autowired
 	private TagService tagService;
 	
+	@Autowired
+	private MusicService musicService;
+	
 	
 	@RequestMapping("/chart")
 	@ResponseBody
@@ -36,4 +41,14 @@ public class ChartController {
 	}
 	
 	
+	@RequestMapping("/getmusic")
+	@ResponseBody
+	public ResponseEntity<String> getMusic(String type, int pg) {
+		JSONObject jobj = new JSONObject();
+		
+		jobj.put("state", RespState.DATA);
+		jobj.put("music", musicService.getMusicChart(type, pg));
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
 }
