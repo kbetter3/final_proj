@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +33,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import spring.bean.AlbumDto;
 import spring.bean.ArtistDto;
 import spring.bean.GenreDto;
+import spring.bean.MemberDto;
 import spring.bean.MusicDto;
 import spring.bean.RespState;
 import spring.service.AlbumService;
 import spring.service.ArtistService;
 import spring.service.GenreService;
+import spring.service.MemberService;
 import spring.service.MusicService;
 import spring.service.PictureService;
 import spring.service.TagService;
+import spring.service.VoucherService;
 
 @Controller
 public class SubmenuController {
@@ -55,6 +61,12 @@ public class SubmenuController {
 	private MusicService musicService;
 	
 	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private VoucherService voucherService;
+	
+	@Autowired
 	private TagService tagService;
 	
 	@Autowired
@@ -66,14 +78,25 @@ public class SubmenuController {
 	@RequestMapping("/header")
 	@ResponseBody
 	public ResponseEntity<String> header(HttpSession session) throws IOException {
-		JSONObject jobj = new JSONObject();
-		
 		String fname = "";
 		
 		if (session.getAttribute("uid") != null) {
 			// 로그인된 사용자의 요청
+			MemberDto memberDto = memberService.getById((String)session.getAttribute("uid"));
+			JSONObject jobj = new JSONObject();
+			jobj.put("uid", (String)session.getAttribute("uid"));
+			
+			if (voucherService.isExpired((String)session.getAttribute("uid"))) {
+				jobj.put("expiredate", "--");
+			} else {
+				jobj.put("expiredate", memberDto.getExpireDate());
+			}
+			
+			jobj.put("downcount", memberDto.getDownCount());
+			
 			fname = "header\\memberheader.txt";
-			return tagService.getTag(fname, "uid", session.getAttribute("uid"));
+//			return tagService.getTag(fname, "uid", session.getAttribute("uid"));
+			return tagService.getTag(fname, "member", jobj);
 		} else {
 			// 로그인하지 않은 사용자의 요청
 			fname = "header\\userheader.txt";
@@ -97,6 +120,27 @@ public class SubmenuController {
 			return tagService.getEmptyResponse().body(jobj.toString());
 		}
 	}
+	
+	@PostMapping("/member/voucher")
+	@ResponseBody
+	public ResponseEntity<String> voucher(HttpSession session, int day) throws ParseException {
+		String uid = (String) session.getAttribute("uid");
+		
+		MemberDto memberDto = memberService.getById(uid);
+		
+		if (voucherService.isExpired(uid)) {
+			voucherService.setVoucher(uid, day);
+		} else {
+			voucherService.addVoucher(uid, day);
+		}
+		
+		
+		JSONObject jobj = new JSONObject();
+		jobj.put("state", RespState.SUCCESS);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
+	
 	
 	
 	

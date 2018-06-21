@@ -6,7 +6,7 @@
 	<!-- Database 명령 작성 -->
 	
 	<insert id="insert" parameterType="map">
-		insert into member(no, id, pw, pwLoop, salt, email, activationKey, regDate, power) values(
+		insert into member(no, id, pw, pwLoop, salt, email, activationKey, regDate, power, expiredate) values(
 		member_seq.nextval,
 		#{id},
 		#{pw},
@@ -15,7 +15,8 @@
 		#{email},
 		#{activationKey},
 		sysdate,
-		0
+		0,
+		sysdate
 		)
 	</insert>
 	
@@ -54,4 +55,17 @@
 	<update id="activation" parameterType="string">
 		update member set power=1 where activationKey=#{activationKey}
 	</update>
+	
+	<update id="setVoucher" parameterType="map">
+		update member set expiredate=sysdate+#{day} where id=#{uid} 
+	</update>
+	
+	<update id="addVoucher" parameterType="map">
+		update member set expiredate=expiredate+#{day} where id=#{uid} 
+	</update>
+	
+	<update id="addDownCount" parameterType="map">
+		update member set downcount=downcount+#{downcount} where id=#{uid}
+	</update>
+
 </mapper>

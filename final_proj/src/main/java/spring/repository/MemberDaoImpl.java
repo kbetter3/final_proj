@@ -78,4 +78,31 @@ public class MemberDaoImpl implements MemberDao {
 	public void accountActivation(String activationKey) {
 		sqlSession.update("spring.repository.MemberDao.activation", activationKey);
 	}
+
+	@Override
+	public void setVoucher(String uid, int day) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("day", day);
+		
+		sqlSession.update("spring.repository.MemberDao.setVoucher", map);
+	}
+
+	@Override
+	public void addVoucher(String uid, int day) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("day", day);
+		
+		sqlSession.update("spring.repository.MemberDao.addVoucher", map);
+	}
+
+	@Override
+	public void addDownCount(String uid, int downcount) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("downcount", downcount);
+		
+		sqlSession.update("spring.repository.MemberDao.addDownCount", map);
+	}
 }

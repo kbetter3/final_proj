@@ -20,8 +20,13 @@ function my_header_header() {
 }
 
 function my_header_success_header(jobj) {
+    var member = jobj.member;
     $("#my-header-right-container").html("").append(jobj.tags);
-    $("#my-header-useridbtn").text(jobj.uid);
+    if (member != null) {
+        $("#my-header-useridbtn").text(member.uid);
+        $("#my-header-voucher").text(member.expiredate);
+        $("#my-header-downcnt").text(member.downcount);
+    }
 }
 
 
@@ -98,6 +103,6 @@ function my_header_logout() {
 }
 
 function my_header_success_logout(jobj) {
-    my_header_header();
     my_player_player();
+    my_header_header();
 }

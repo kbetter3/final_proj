@@ -55,6 +55,7 @@
         <script src="${rootPath}/res/js/my.state.js"></script>
         <script src="${rootPath}/res/js/my.player.js"></script>
         <script src="${rootPath}/res/js/my.mgmt.js"></script>
+        <script src="${rootPath}/res/js/my.voucher.js"></script>
         
         <script src="${rootPath}/res/js/my.artistupload.js"></script>
         <script src="${rootPath}/res/js/my.albumupload.js"></script>
@@ -122,10 +123,10 @@
 		
         <script>
             $(document).ready(function(){
+            	my_player_player();
                 my_header_header();
                 my_menu_menu();
                 my_submenu_submenu("chartsubmenu");
-                my_player_player();
             });
         </script>
     </body>

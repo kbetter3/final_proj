@@ -27,12 +27,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 import spring.bean.MainDirectory;
+import spring.bean.MemberDto;
 import spring.bean.MusicDto;
 import spring.bean.MusicPlayDto;
 import spring.bean.RespState;
 import spring.service.BadReqService;
+import spring.service.MemberService;
 import spring.service.MusicService;
 import spring.service.TagService;
+import spring.service.VoucherService;
 
 @Controller
 public class PlayerController {
@@ -42,10 +45,17 @@ public class PlayerController {
 	private MusicService musicService;
 	
 	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
 	private TagService tagService;
 	
 	@Autowired
 	private BadReqService badReqService;
+	
+	@Autowired
+	private VoucherService voucherService;
+	
 	
 //	@RequestMapping(value="/player")
 //	public String player() {
@@ -74,7 +84,7 @@ public class PlayerController {
 	public void music(HttpServletRequest request, HttpServletResponse response, @RequestParam String name) throws IOException, UnsupportedAudioFileException {
 		
 		log.debug("MN = {}", name);
-		File file = new File("C:\\music\\test.mp3");
+		File file = new File("d:\\mp3\\1529504972062-5fa80b28-aa3b-4754-b5af-69467deff386");
 		log.debug("f exist = {}", file.exists());
 		RandomAccessFile target = new RandomAccessFile(file, "r");
 		
@@ -163,7 +173,6 @@ public class PlayerController {
 	@Transactional
 	@ResponseBody
 	public void music(HttpSession session, HttpServletRequest request, HttpServletResponse response, int musicno) throws IOException, UnsupportedAudioFileException {
-		
 //		log.debug("MN = {}", name);
 		
 		MusicPlayDto musicPlayDto = new MusicPlayDto();
@@ -172,6 +181,12 @@ public class PlayerController {
 		musicService.insert(musicPlayDto);
 		
 		MusicDto musicDto = musicService.getByNo(musicno);
+		
+		String uid = (String)session.getAttribute("uid");
+		
+		boolean isExpired = voucherService.isExpired(uid);
+		
+		
 		
 		File file = new File(MainDirectory.DIRECTORY + ":/mp3", musicDto.getMFile());
 		log.debug("f exist = {}", file.exists());
@@ -215,8 +230,13 @@ public class PlayerController {
 
 				int idxm = range.trim().indexOf("-");	// "-" 위치
 				rangeStart = Long.parseLong(range.substring(6, idxm));
-//				rangeEnd = Long.parseLong(range.substring(idxm + 1));		// 전체 재생시 활성화
-				rangeEnd = (long) (targetSize * rate);						// 1분 재생시 활성화
+				
+				if (isExpired) {
+					rangeEnd = (long) (targetSize * rate);						// 1분 재생시 활성화
+				} else {
+					rangeEnd = Long.parseLong(range.substring(idxm + 1));		// 전체 재생시 활성화
+				}
+				
 
 				if (rangeStart > 0) {
 					isPart = true;
@@ -225,8 +245,14 @@ public class PlayerController {
 				rangeEnd = targetSize - 1;
 			}
 
-//			long partSize = rangeEnd - rangeStart + 1;						// 전체 재생시 활성화
-			long partSize = limit - rangeStart + 1;							// 1분 재생시 활성화
+			
+			long partSize;
+			if (isExpired) {
+				partSize = limit - rangeStart + 1;							// 1분 재생시 활성화
+			} else {
+				partSize = rangeEnd - rangeStart + 1;						// 전체 재생시 활성화
+			}
+			
 
 			response.reset();
 
@@ -256,5 +282,7 @@ public class PlayerController {
 		} finally {
 			target.close();
 		}
+		
+		
 	}
 }

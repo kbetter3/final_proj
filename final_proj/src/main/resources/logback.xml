@@ -20,7 +20,24 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
    <!-- Uncomment and add your logger here:
     <logger name="org.springframework.samples.service.service" level="debug"/> -->
          
+	
+<!-- 	<property name="LOG_DIR" value="D:/logs" /> -->
+	<property name="LOG_DIR" value="E:/logs" />
+	
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+   			<fileNamePattern>/log_file_name.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+	</appender>
+	
+	
+	
     <root level="debug">
-        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
     </root>
 </configuration>

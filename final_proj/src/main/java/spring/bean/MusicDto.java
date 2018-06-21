@@ -25,7 +25,7 @@ public class MusicDto {
 	public JSONObject convertToJSON() {
 		JSONObject jobj = new JSONObject();
 		
-		if (this.statement != 0) {
+		if (this.statement == 0) {
 			jobj.put("no", this.no);
 		}
 		

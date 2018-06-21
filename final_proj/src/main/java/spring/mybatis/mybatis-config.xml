@@ -18,6 +18,7 @@
 		<typeAlias type="spring.bean.MemberDto" alias="memberDto"/>
 		<typeAlias type="spring.bean.MusicPlayDto" alias="musicPlayDto"/>
 		<typeAlias type="spring.bean.MusicPlayGroupDto" alias="musicPlayGroupDto"/>
+		<typeAlias type="spring.bean.SimpleDto" alias="simpleDto"/>
 	</typeAliases>
 
 </configuration>

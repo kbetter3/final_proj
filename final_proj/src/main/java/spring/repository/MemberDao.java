@@ -22,4 +22,9 @@ public interface MemberDao {
 	public MemberDto getByActivationKey(String activationKey);
 	
 	public void accountActivation(String activationKey);
+	
+	public void setVoucher(String uid, int day);
+	public void addVoucher(String uid, int day);
+	
+	public void addDownCount(String uid, int downcount);
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.repository.SimpleDao">
+	<!-- Database 명령 작성 -->
+	
+	<select id="getVoucherDateCalc" resultType="simpleDto" parameterType="string">
+		<![CDATA[
+		select (case when (select expiredate from member where id=#{uid}) < sysdate then 'true' else 'false' end) answer from dual
+		]]>
+	</select>
+</mapper>

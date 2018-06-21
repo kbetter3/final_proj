@@ -44,7 +44,7 @@ public class AccountActivationEmailServiceImpl implements EmailService {
 		helper.setFrom("sw4.finalProj");
 		helper.setTo(memberDto.getEmail());
 		
-		String htmlContent = "<a href=\"http://61.75.27.204:14000/final_proj/activation?ak=" + memberDto.getActivationKey() + "\">링크</a>";
+		String htmlContent = "계정을 활성화 하려면 " + "<a href=\"http://118.221.32.17/final_proj/activation?ak=" + memberDto.getActivationKey() + "\" target=\"_blank\">여기</a>" + "를 누르세요.";
 		helper.setText(htmlContent, true);
 		
 		sender.send(message);
