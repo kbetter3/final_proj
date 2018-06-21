@@ -21,8 +21,8 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
     <logger name="org.springframework.samples.service.service" level="debug"/> -->
          
 	
-<!-- 	<property name="LOG_DIR" value="D:/logs" /> -->
-	<property name="LOG_DIR" value="E:/logs" />
+	<property name="LOG_DIR" value="D:/logs" />
+<!-- 	<property name="LOG_DIR" value="E:/logs" /> -->
 	
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_DIR}</file>
