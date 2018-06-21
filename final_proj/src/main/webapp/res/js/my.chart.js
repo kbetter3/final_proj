@@ -52,6 +52,19 @@ function my_chart_getMusic(target, page) {
 
 function my_chart_success_getMusic(jobj) {
     var music = jobj.music;
-
-    console.log(music.length);
+    
+    $(".my-chart-contents").html("");
+    
+    for (var i = 0; i < music.length; i++) {
+        var musicrow = $(".my-chart-music-row").clone();
+        
+        musicrow.find(".my-chart-no").text(i + 1);
+        musicrow.find(".my-chart-name").text(music[i].name);
+        musicrow.find(".my-chart-artist").text(music[i].artist);
+        musicrow.find(".my-chart-album").text(music[i].albumname);
+        musicrow.find("img").attr("src", "albumpic?fname=" + music[i].thumb);
+        musicrow.find(".my-chart-likecount").text(music[i].likecount);
+        
+        $(".my-chart-contents").append(musicrow);
+    }
 }

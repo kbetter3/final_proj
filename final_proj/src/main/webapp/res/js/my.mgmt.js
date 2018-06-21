@@ -82,12 +82,12 @@ function my_mgmt_albumcont() {
 
 function my_mgmt_success_albumcont(jobj) {
     var album = jobj.album;
-    
+
     console.log("album : " + album.length);
-    
+
     for (var i = 0; i < album.length; i++) {
         var albumrow = $(".my-albummgmt-album-row").clone();
-        
+
         albumrow.find(".my-albummgmt-no").text(i + 1);
         albumrow.find("img").attr("src", "mgmt/albumpic?fname=" + album[i].thumb);
         albumrow.find(".my-albummgmt-name").text(album[i].name);
@@ -96,7 +96,7 @@ function my_mgmt_success_albumcont(jobj) {
         albumrow.find(".my-albummgmt-agency").text(album[i].agency);
         albumrow.find(".my-albummgmt-releasedate").text(album[i].releasedate);
         albumrow.find(".my-albummgmt-likecount").text(album[i].likecount);
-        
+
         $(".my-albummgmt-contents").append(albumrow);
     }
 }
@@ -139,16 +139,16 @@ function my_mgmt_musiccont() {
 
 function my_mgmt_success_musiccont(jobj) {
     var music = jobj.music;
-    
+
     for (var i = 0; i < music.length; i++) {
         var musicrow = $(".my-musicmgmt-music-row").clone();
-        
+
         musicrow.find(".my-musicmgmt-no").text(i + 1);
-        
+
         musicrow.find(".my-musicmgmt-name").text(music[i].name);
         musicrow.find(".my-musicmgmt-artist").text(music[i].artist);
         $.ajax({
-            url: "mgmt/albumname",
+            url: "albumname",
             data: {albumno: music[i].albumno},
             success: function(jobj){
                 musicrow.find(".my-musicmgmt-album").text(jobj.albumname);
@@ -156,7 +156,7 @@ function my_mgmt_success_musiccont(jobj) {
             }
         });
         musicrow.find(".my-musicmgmt-likecount").text(music[i].likecount);
-        
+
         $(".my-musicmgmt-contents").append(musicrow);
     }
 }

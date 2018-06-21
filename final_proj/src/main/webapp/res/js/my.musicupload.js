@@ -98,6 +98,6 @@ function my_musicupload_upload() {
 
 function my_musicupload_success_musicupload(jobj) {
     if (jobj.state == RespState.success) {
-        my_mgmt_musicupload();
+        my_mgmt_musicmgmt();
     }
 }

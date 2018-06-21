@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import spring.bean.MusicDto;
+import spring.bean.MusicPlayDto;
 
 @Service
 public interface MusicService {
-public void insert(MusicDto musicDto);
+	public void insert(MusicDto musicDto);
+	public void insert(MusicPlayDto musicPlayDto);
 	
 	public List<MusicDto> getList();
 	public List<MusicDto> getListOrderByReleaseDate();

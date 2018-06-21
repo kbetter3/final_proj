@@ -49,7 +49,7 @@ public class UploaderController {
 		return "uploader/config";
 	}
 	
-	@RequestMapping("/mgmt/albumname")
+	@RequestMapping("/albumname")
 	@ResponseBody
 	public ResponseEntity<String> albumname(int albumno) {
 		AlbumDto albumDto = albumService.getByNo(albumno);
@@ -79,13 +79,13 @@ public class UploaderController {
 	}
 	
 	
-	@RequestMapping("/mgmt/artistpic")
+	@RequestMapping(value = {"/mgmt/artistpic", "/artistpic"})
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> artistPic(String fname) throws IOException {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadArtistPic(fname));
 	}
 	
-	@RequestMapping("/mgmt/albumpic")
+	@RequestMapping(value = {"/mgmt/albumpic", "/albumpic"})
 	@ResponseBody
 	public ResponseEntity<ByteArrayResource> albumPic(String fname) throws IOException {
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(pictureService.loadAlbumPic(fname));

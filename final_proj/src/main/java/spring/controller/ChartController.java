@@ -49,6 +49,8 @@ public class ChartController {
 		jobj.put("state", RespState.DATA);
 		jobj.put("music", musicService.getMusicChart(type, pg));
 		
+		log.debug("before return json {}", jobj);
+		
 		return tagService.getEmptyResponse().body(jobj.toString());
 	}
 }

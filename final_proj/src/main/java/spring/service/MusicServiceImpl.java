@@ -8,26 +8,36 @@ import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import spring.bean.AlbumDto;
 import spring.bean.MainDirectory;
 import spring.bean.MusicDto;
+import spring.bean.MusicPlayDto;
 import spring.bean.MusicPlayGroupDto;
 import spring.bean.SubmenuType;
 import spring.repository.AlbumDao;
 import spring.repository.MusicDao;
+import spring.repository.MusicPlayDao;
 import spring.repository.MusicPlayGroupDao;
 
 @Service("musicService")
 public class MusicServiceImpl implements MusicService {
+	
+	private Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private MusicDao musicDao;
 	
 	@Autowired
 	private AlbumDao albumDao;
+	
+	@Autowired
+	private MusicPlayDao musicPlayDao;
 	
 	@Autowired
 	private MusicPlayGroupDao musicPlayGroupDao;
@@ -82,10 +92,19 @@ public class MusicServiceImpl implements MusicService {
 			list = musicDao.getMusicChartOrderByPlayCount(page);			
 		} else if (type.equals(SubmenuType.CHART_MONTHLY)) {
 			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateMonthly());
+			if (list.isEmpty()) {
+				list = musicDao.getMusicChartOrderByPlayCount(page);
+			}
 		} else if (type.equals(SubmenuType.CHART_WEEKLY)) {
 			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateWeekly());
+			if (list.isEmpty()) {
+				list = musicDao.getMusicChartOrderByPlayCount(page);
+			}
 		} else if (type.equals(SubmenuType.CHART_DAILY)) {
 			list = getListByPlayCount(musicPlayGroupDao.getListByPlayDateDaily());
+			if (list.isEmpty()) {
+				list = musicDao.getMusicChartOrderByPlayCount(page);
+			}
 		} else if (type.equals(SubmenuType.LASTEST_DOM)) {
 			list = musicDao.getListByLoc("dom");
 		} else if (type.equals(SubmenuType.LASTEST_INT)) {
@@ -107,11 +126,17 @@ public class MusicServiceImpl implements MusicService {
 		}
 		
 		if (list != null) {
+			
+			
 			for (MusicDto music : list) {
 				JSONObject musicObj = music.convertToJSON();
-				musicObj.put("albumName", albumDao.getByNo(music.getAlbumNo()));
-				jsonArr.put(music);
+				AlbumDto albumDto = albumDao.getByNo(music.getAlbumNo());
+				musicObj.put("albumname", albumDto.getName());
+				musicObj.put("thumb", albumDto.getThumb());
+				jsonArr.put(musicObj);
 			}
+			
+			log.debug("json: {}", jsonArr);
 		}
 		
 		return jsonArr;
@@ -146,5 +171,10 @@ public class MusicServiceImpl implements MusicService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void insert(MusicPlayDto musicPlayDto) {
+		musicPlayDao.insert(musicPlayDto);
 	}
 }

@@ -20,7 +20,6 @@ public class UploaderInterceptor extends HandlerInterceptorAdapter {
 		if (obj != null && (int)obj == 2) {
 			return true;
 		} else {
-			response.sendRedirect(request.getContextPath() + "/chart");
 			return false;
 		}
 	}
