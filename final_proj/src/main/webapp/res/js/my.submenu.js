@@ -5,7 +5,7 @@ function my_submenu_submenu(target) {
         async: true,
         success: my_submenu_success_submenu
     });
-    
+
     var chartcontent;
     if (target == "chartsubmenu") {
         chartcontent = "chartrealtime";
@@ -14,7 +14,7 @@ function my_submenu_submenu(target) {
     } else if (target == "genresubmenu") {
         chartcontent = "genreballad";
     }
-    
+
     my_chart_chart(chartcontent, 1);
 }
 
@@ -22,10 +22,10 @@ function my_submenu_success_submenu(jobj) {
     if (jobj.state == RespState.tags) {
         $("#my-submenu-container").html("").append(jobj.tags);
     } else {
-        console.log("로그인 전용 메뉴");
+        //console.log("로그인 전용 메뉴");
     }
-    
-    
+
+
 }
 
 

@@ -12,12 +12,7 @@ function my_player_success_player(jobj) {
 
 function my_player_load() {
     $("#jquery_jplayer_1").jPlayer({
-		          ready: function (event) {
-			     $(this).jPlayer("setMedia", {
-				title: "Bubble",
-				mp3: "music?name=test",
-			});
-		},
+        ready: function (event) {},
 		swfPath: "${rootPath}/res/jplayer/js",
 		supplied: "mp3",
 		wmode: "window",

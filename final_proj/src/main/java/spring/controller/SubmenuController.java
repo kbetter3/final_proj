@@ -89,7 +89,7 @@ public class SubmenuController {
 			if (voucherService.isExpired((String)session.getAttribute("uid"))) {
 				jobj.put("expiredate", "--");
 			} else {
-				jobj.put("expiredate", memberDto.getExpireDate());
+				jobj.put("expiredate", memberDto.getExpireDate().substring(0, 10));
 			}
 			
 			jobj.put("downcount", memberDto.getDownCount());
@@ -285,10 +285,12 @@ public class SubmenuController {
 		
 		switch ((int)session.getAttribute("upower")) {
 		case 2:
+			// 업로더가 요청한 경우
 			albumList = albumService.getListByMemberId((String)session.getAttribute("uid"));
 			break;
 			
 		case 9:
+			// 관리자가 요청한 경우
 			albumList = albumService.getList();
 			break;
 			
@@ -300,7 +302,11 @@ public class SubmenuController {
 		
 		JSONArray albumArr = new JSONArray();
 		for (AlbumDto album : albumList) {
-			albumArr.put(album.convertToJSON());
+			ArtistDto artistDto = artistService.getByNo(album.getArtistNo());
+			JSONObject albumObj = album.convertToJSON();
+			albumObj.put("member", artistDto.getName());
+			
+			albumArr.put(albumObj);
 		}
 		
 		jobj.put("state", RespState.DATA);
@@ -368,7 +374,11 @@ public class SubmenuController {
 		
 		JSONArray musicArr = new JSONArray();
 		for (MusicDto music : musicList) {
-			musicArr.put(music.convertToJSON());
+			ArtistDto artistDto = artistService.getByNo(music.getArtistNo());
+			
+			JSONObject musicObj = music.convertToJSON();
+			musicObj.put("artist", artistDto.getName());
+			musicArr.put(musicObj);
 		}
 		
 		jobj.put("state", RespState.DATA);

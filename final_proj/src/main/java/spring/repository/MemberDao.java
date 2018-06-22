@@ -27,4 +27,5 @@ public interface MemberDao {
 	public void addVoucher(String uid, int day);
 	
 	public void addDownCount(String uid, int downcount);
+	public void subDownCount(String uid);
 }

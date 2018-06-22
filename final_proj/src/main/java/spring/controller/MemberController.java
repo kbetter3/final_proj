@@ -1,7 +1,9 @@
 package spring.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 
 import javax.mail.MessagingException;
@@ -9,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +30,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import spring.bean.MainDirectory;
 import spring.bean.MemberDto;
+import spring.bean.MusicDto;
 import spring.bean.RespState;
 import spring.service.BadReqService;
 import spring.service.MemberService;
+import spring.service.MusicService;
 import spring.service.TagService;
 
 @Controller
@@ -37,6 +45,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MusicService musicService;
 
 	@Autowired
 	private TagService tagService;
@@ -216,5 +227,31 @@ public class MemberController {
 			// 비정상 접근 (로그인하지 않은 사용자)
 			return badReqService.forbiddenReq().body(null);
 		}
+	}
+	
+	
+	@RequestMapping("/member/musicdown")
+	@ResponseBody
+	@Transactional
+	public ResponseEntity<ByteArrayResource> musicDownload(HttpSession session, int musicno) throws IOException {
+		MemberDto memberDto = memberService.getById((String)session.getAttribute("uid"));
+		
+		if (memberDto.getDownCount() > 0) {
+			// 다운로드 횟수가 있을 경우
+			memberService.subDownCount(memberDto.getId());
+			MusicDto musicDto = musicService.getByNo(musicno);
+			
+			File mfile = new File(MainDirectory.DIRECTORY + ":/mp3", musicDto.getMFile());
+			byte[] data = FileUtils.readFileToByteArray(mfile);
+			
+			ByteArrayResource resource = new ByteArrayResource(data);
+			ResponseEntity<ByteArrayResource> entity = ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(musicDto.getName(), "UTF-8") + ".mp3").contentType(MediaType.APPLICATION_OCTET_STREAM).contentLength(data.length).body(resource);
+			
+			return entity;
+		} else {
+			// 다운로드 횟수가 없을 경우
+			return null;
+		}
+		
 	}
 }

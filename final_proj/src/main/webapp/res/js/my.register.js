@@ -22,7 +22,7 @@ function register_idValidationCheck() {
     if (regex.test(id) && id.length >= 4 && id.length <= 20) {
         $("#my-register-id-info").hide();
 
-        console.log("ok");
+        //console.log("ok");
         register_idValidCheck = true;
     } else {
         if (id.length === 0) {
@@ -33,7 +33,7 @@ function register_idValidationCheck() {
 
         id_input.removeClass("my-member-gray-border my-member-green-border").addClass("my-member-red-border");
 
-        console.log("no");
+        //console.log("no");
         register_idValidCheck = false;
     }
 }
@@ -282,7 +282,7 @@ function register_encpw() {
     var pw = $("#my-register-pw");
     var encpw = SHA256(pw.val());
     pw.val(encpw);
-    console.log(encpw);
+    //console.log(encpw);
     $("#my-register-pwchck").val("");
     return encpw;
 }

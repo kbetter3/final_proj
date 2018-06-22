@@ -25,4 +25,6 @@ public interface MemberService {
 	public MemberDto login(String id, String pw) throws NoSuchAlgorithmException;
 	
 	public boolean accountActivation(String activationKey);
+	
+	public void subDownCount(String uid);
 }

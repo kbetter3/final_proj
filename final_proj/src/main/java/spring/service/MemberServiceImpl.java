@@ -110,4 +110,9 @@ public class MemberServiceImpl implements MemberService {
 		return alreadyActivated;
 	}
 
+	@Override
+	public void subDownCount(String uid) {
+		memberDao.subDownCount(uid);
+	}
+
 }

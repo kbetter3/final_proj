@@ -51,7 +51,7 @@ function login_login() {
 }
 
 function login_success_login(jobj) {
-    console.log(jobj.state);
+    //console.log(jobj.state);
     if (jobj.state == RespState.success) {
         my_player_player();
         my_header_header();

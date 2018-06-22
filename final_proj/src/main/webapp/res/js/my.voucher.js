@@ -12,5 +12,6 @@ function my_voucher_buy() {
 }
 
 function my_voucher_success_buy() {
-    console.log("구매성공");
+    my_header_header();
+    my_header_home();
 }

@@ -20,7 +20,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
    <!-- Uncomment and add your logger here:
     <logger name="org.springframework.samples.service.service" level="debug"/> -->
          
-	
+<!-- 	<property name="LOG_DIR" value="C:/logs" /> -->
 	<property name="LOG_DIR" value="D:/logs" />
 <!-- 	<property name="LOG_DIR" value="E:/logs" /> -->
 	
@@ -38,6 +38,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 	
 	
     <root level="debug">
-        <appender-ref ref="file"/>
+    	<appender-ref ref="console"/>
+<!--         <appender-ref ref="file"/> -->
     </root>
 </configuration>
