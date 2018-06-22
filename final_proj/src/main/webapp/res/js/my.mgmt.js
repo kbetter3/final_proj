@@ -1,3 +1,14 @@
+function my_mgmt_myinfo() {
+    $.ajax({
+        url: "member/myinfo",
+        success: my_mgmt_success_myinfo
+    });
+}
+
+function my_mgmt_success_myinfo(jobj) {
+    $("#my-contents-container").html("").append(jobj.tags);
+}
+
 // 가수/그룹 관리페이지 불러오기
 function my_mgmt_artistmgmt() {
     $.ajax({

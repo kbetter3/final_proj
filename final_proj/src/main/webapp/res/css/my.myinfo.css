@@ -1,0 +1,10 @@
+.my-myinfo-container {
+    width: 550px;
+    margin: 20px auto 0 auto;
+    padding: 20px 0;
+}
+
+.my-myinfo-title {
+    width: 100%;
+    text-align: center;
+}

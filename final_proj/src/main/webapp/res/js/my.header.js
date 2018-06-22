@@ -95,6 +95,7 @@ function my_header_userid() {
 function my_header_success_userid(jobj) {
     $("#my-menu-container").html("");
     $("#my-submenu-container").html("").append(jobj.tags);
+    my_mgmt_myinfo();
 }
 
 

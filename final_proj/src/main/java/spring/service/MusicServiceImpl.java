@@ -15,12 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import spring.bean.AlbumDto;
+import spring.bean.ArtistDto;
 import spring.bean.MainDirectory;
 import spring.bean.MusicDto;
 import spring.bean.MusicPlayDto;
 import spring.bean.MusicPlayGroupDto;
 import spring.bean.SubmenuType;
 import spring.repository.AlbumDao;
+import spring.repository.ArtistDao;
 import spring.repository.MusicDao;
 import spring.repository.MusicPlayDao;
 import spring.repository.MusicPlayGroupDao;
@@ -35,6 +37,9 @@ public class MusicServiceImpl implements MusicService {
 	
 	@Autowired
 	private AlbumDao albumDao;
+	
+	@Autowired
+	private ArtistDao artistDao;
 	
 	@Autowired
 	private MusicPlayDao musicPlayDao;
@@ -131,8 +136,10 @@ public class MusicServiceImpl implements MusicService {
 			for (MusicDto music : list) {
 				JSONObject musicObj = music.convertToJSON();
 				AlbumDto albumDto = albumDao.getByNo(music.getAlbumNo());
+				ArtistDto artistDto = artistDao.getByNo(albumDto.getArtistNo());
 				musicObj.put("albumname", albumDto.getName());
 				musicObj.put("thumb", albumDto.getThumb());
+				musicObj.put("artist", artistDto.getName());
 				jsonArr.put(musicObj);
 			}
 			

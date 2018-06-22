@@ -254,4 +254,27 @@ public class MemberController {
 		}
 		
 	}
+	
+	@RequestMapping("/loginchck")
+	@ResponseBody
+	public ResponseEntity<String> loginchck(HttpSession session, int musicno) {
+		JSONObject jobj = new JSONObject();
+		
+		if (session.getAttribute("uid") != null) {
+			MemberDto memberDto = memberService.getById((String)session.getAttribute("uid"));
+			
+			if (memberDto.getDownCount() > 0) {
+				jobj.put("state", RespState.SUCCESS);
+				jobj.put("musicno", musicno);
+			}
+		}
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+	}
+	
+	@GetMapping("/member/myinfo")
+	@ResponseBody
+	public ResponseEntity<String> myinfoTag(HttpSession session) throws IOException {
+		return tagService.getTag("myinfo.txt");
+	}
 }
