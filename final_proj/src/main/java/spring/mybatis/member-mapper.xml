@@ -72,4 +72,8 @@
 		update member set downcount=downcount-1 where id=#{uid}
 	</update>
 
+	<update id="updatePower" parameterType="map">
+		update member set power=#{power} where id=#{uid}
+	</update>
+
 </mapper>

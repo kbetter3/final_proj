@@ -115,4 +115,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.subDownCount(uid);
 	}
 
+	@Override
+	public void updatePower(String uid, int power) {
+		memberDao.updatePower(uid, power);
+	}
+
 }

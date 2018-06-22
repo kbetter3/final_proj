@@ -230,6 +230,35 @@ public class MemberController {
 	}
 	
 	
+	@PostMapping("/member/myinfo")
+	@ResponseBody
+	@Transactional
+	public ResponseEntity<String> myInfo(HttpSession session) {		
+		int upower = (int)session.getAttribute("upower");
+		
+		JSONObject jobj = new JSONObject();
+		if (upower == 1) {
+			memberService.updatePower((String)session.getAttribute("uid"), 2);
+			MemberDto memberDto = memberService.getById((String)session.getAttribute("uid")); 
+			session.setAttribute("upower", memberDto.getPower());
+			
+			jobj.put("id", memberDto.getId());
+			jobj.put("email", memberDto.getEmail());
+			jobj.put("power", memberDto.getPower());
+			jobj.put("regdate", memberDto.getRegDate());
+			jobj.put("voucher", memberDto.getExpireDate());
+			jobj.put("downcount", memberDto.getDownCount());
+			
+			jobj.put("state", RespState.DATA);
+			
+			return tagService.getEmptyResponse().body(jobj.toString());
+		} else {
+			jobj.put("state", RespState.MESSAGE);
+			jobj.put("msg", "권한이 올바르지 않습니다.");
+			return tagService.getEmptyResponse().body(jobj.toString());
+		}
+	}
+	
 	@RequestMapping("/member/musicdown")
 	@ResponseBody
 	@Transactional

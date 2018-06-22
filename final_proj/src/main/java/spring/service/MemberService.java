@@ -27,4 +27,6 @@ public interface MemberService {
 	public boolean accountActivation(String activationKey);
 	
 	public void subDownCount(String uid);
+	
+	public void updatePower(String uid, int power);
 }

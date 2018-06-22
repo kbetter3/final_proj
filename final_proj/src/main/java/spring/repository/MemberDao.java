@@ -28,4 +28,6 @@ public interface MemberDao {
 	
 	public void addDownCount(String uid, int downcount);
 	public void subDownCount(String uid);
+	
+	public void updatePower(String uid, int power);
 }

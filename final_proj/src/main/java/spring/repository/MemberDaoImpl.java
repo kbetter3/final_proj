@@ -110,4 +110,13 @@ public class MemberDaoImpl implements MemberDao {
 	public void subDownCount(String uid) {
 		sqlSession.update("spring.repository.MemberDao.subDownCount", uid);
 	}
+
+	@Override
+	public void updatePower(String uid, int power) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uid", uid);
+		map.put("power", power);
+		
+		sqlSession.update("spring.repository.MemberDao.updatePower", map);
+	}
 }
