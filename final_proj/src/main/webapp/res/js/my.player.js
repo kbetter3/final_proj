@@ -9,7 +9,7 @@ function my_player_success_player(jobj) {
     $("#my-player-container").html("").append(jobj.tags);
     $("button.jp-play").on("click",function(e){$(e.currentTarget).toggleClass("glyphicon-play").toggleClass("glyphicon-pause")});
     $("button.jp-stop").on("click",function(e){
-        $("button.jp-play").addClass("glyphicon-play glyphicon-pause").removeClass("glyphicon-play");
+        $("button.jp-play").removeClass("glyphicon-play glyphicon-pause").addClass("glyphicon-play");
     });
 }
 

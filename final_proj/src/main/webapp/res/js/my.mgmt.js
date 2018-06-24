@@ -164,12 +164,14 @@ function my_mgmt_success_musiccont(jobj) {
         $.ajax({
             url: "albumname",
             data: {albumno: music[i].albumno},
-            success: function(jobj){
-                musicrow.find(".my-musicmgmt-album").text(jobj.albumname);
-                musicrow.find("img").css("width", "60px").css("height", "60px").attr("src", "mgmt/albumpic?fname=" + jobj.albumthumb);
+            async: false,
+            success: function(jobj2){
+                musicrow.find(".my-musicmgmt-album").text(jobj2.albumname);
+                musicrow.find("img").css("width", "60px").css("height", "60px").attr("src", "mgmt/albumpic?fname=" + jobj2.albumthumb);
             }
         });
         musicrow.find(".my-musicmgmt-likecount").text(music[i].likecount);
+        musicrow.find(".my-musicmgmt-listenbtn").attr("musicno", music[i].no).on("click", my_player_playmusic);
 
         $(".my-musicmgmt-contents").append(musicrow);
     }
