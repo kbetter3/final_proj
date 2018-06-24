@@ -38,7 +38,8 @@ function my_mgmt_success_artistcont(jobj) {
     var artist = jobj.artist;
 
     for (var i = 0; i < artist.length; i++) {
-        var artistrow = $(".my-artistmgmt-artist-row").clone();
+        var artistrow = $(".my-artistmgmt-artist-row-template").clone();
+        artistrow.removeClass("my-artistmgmt-artist-row-template").addClass("my-artistmgmt-artist-row");
 
         artistrow.find(".my-artistmgmt-no").text(i + 1);
         artistrow.find("img").css("width", "60px").css("height", "60px").attr("src", "mgmt/artistpic?fname=" + artist[i].thumb);
@@ -97,7 +98,8 @@ function my_mgmt_success_albumcont(jobj) {
     //console.log("album : " + album.length);
 
     for (var i = 0; i < album.length; i++) {
-        var albumrow = $(".my-albummgmt-album-row").clone();
+        var albumrow = $(".my-albummgmt-album-row-template").clone();
+        albumrow.removeClass("my-albummgmt-album-row-template").addClass("my-albummgmt-album-row");
 
         albumrow.find(".my-albummgmt-no").text(i + 1);
         albumrow.find("img").css("width", "60px").css("height", "60px").attr("src", "mgmt/albumpic?fname=" + album[i].thumb);
@@ -152,7 +154,8 @@ function my_mgmt_success_musiccont(jobj) {
     var music = jobj.music;
 
     for (var i = 0; i < music.length; i++) {
-        var musicrow = $(".my-musicmgmt-music-row").clone();
+        var musicrow = $(".my-musicmgmt-music-row-template").clone();
+        musicrow.removeClass("my-musicmgmt-music-row-template").addClass("my-musicmgmt-music-row");
 
         musicrow.find(".my-musicmgmt-no").text(i + 1);
 

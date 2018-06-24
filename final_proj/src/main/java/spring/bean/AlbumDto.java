@@ -24,11 +24,13 @@ public class AlbumDto {
 		jobj.put("name", this.name);
 		jobj.put("artistno", this.artistNo);
 		jobj.put("genre", this.genre);
-		jobj.put("releasedate", this.releaseDate);
+//		jobj.put("releasedate", this.releaseDate);
+		jobj.put("releasedate", this.releaseDate.substring(0, 10));
 		jobj.put("agency", this.agency);
 		jobj.put("thumb", this.thumb);
 		jobj.put("liekcount", this.likeCount);
-		jobj.put("regdate", this.regDate);
+//		jobj.put("regdate", this.regDate);
+		jobj.put("regdate", this.regDate.substring(0, 10));
 		jobj.put("mid", this.mId);
 		
 		return jobj;

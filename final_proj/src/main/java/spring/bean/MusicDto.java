@@ -32,7 +32,8 @@ public class MusicDto {
 		jobj.put("name", this.name);
 		jobj.put("albumno", this.albumNo);
 		jobj.put("lyrics", this.lyrics);
-		jobj.put("releasedate", this.releaseDate);
+//		jobj.put("releasedate", this.releaseDate);
+		jobj.put("releasedate", this.releaseDate.substring(0, 10));
 		jobj.put("genre", this.genre);
 //		jobj.put("artistNo", this.artistNo);
 		jobj.put("statement", this.statement);
@@ -40,7 +41,8 @@ public class MusicDto {
 		jobj.put("playcount", this.playCount);
 		jobj.put("downcount", this.downCount);
 		jobj.put("mfile", this.mFile);
-		jobj.put("regdate", this.regDate);
+//		jobj.put("regdate", this.regDate);
+		jobj.put("regdate", this.regDate.substring(0, 10));
 		jobj.put("mid", this.mId);
 		jobj.put("loc", this.loc);
 		

@@ -1,5 +1,7 @@
 package spring.bean;
 
+import org.json.JSONObject;
+
 import lombok.Data;
 
 @Data
@@ -18,4 +20,17 @@ public class MemberDto {
 	private String expireDate;
 	private int downCount;
 	private String loginSession;
+	
+	public JSONObject convertToJSON() {
+		JSONObject jobj = new JSONObject();
+		
+		jobj.put("id", this.id);
+		jobj.put("email", this.email);
+		jobj.put("regdate", this.regDate.substring(0, 10));
+		jobj.put("power", this.power);
+		jobj.put("voucher", this.expireDate);
+		jobj.put("downcount", this.downCount);
+		
+		return jobj;
+	}
 }

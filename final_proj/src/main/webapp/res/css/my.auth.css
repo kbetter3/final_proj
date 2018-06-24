@@ -1,0 +1,26 @@
+.my-auth-container {
+    width: 550px;
+    margin: 0 auto;
+    padding: 20px 50px;
+    border: 1px solid rgb(0, 0, 0, 0.13);
+    background-color: white;
+    text-align:center;
+}
+.my-auth-title {
+    margin: 50px auto 20px;
+}
+.my-auth-link{
+    margin:0 auto 50px;
+    display:inline-block;
+    color:rebeccapurple;
+    text-decoration:underline;
+}
+
+.my-auth-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.my-auth-logo a:link, .my-auth-logo a:visited, .my-auth-logo:hover {
+    text-decoration: none;
+}

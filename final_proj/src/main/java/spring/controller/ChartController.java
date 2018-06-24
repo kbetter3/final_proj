@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -43,11 +44,15 @@ public class ChartController {
 	
 	@RequestMapping("/getmusic")
 	@ResponseBody
-	public ResponseEntity<String> getMusic(String type, int pg) {
+	public ResponseEntity<String> getMusic(HttpSession session, String type, int pg) {
 		JSONObject jobj = new JSONObject();
 		
 		jobj.put("state", RespState.DATA);
 		jobj.put("music", musicService.getMusicChart(type, pg));
+		
+		if (session.getAttribute("uid") != null) {
+			jobj.put("uid", (String)session.getAttribute("uid"));
+		}
 		
 		log.debug("before return json {}", jobj);
 		

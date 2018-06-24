@@ -15,7 +15,8 @@
             <h1><a href="#">Logo</a></h1>
         </div>
         <div class="my-auth-container">
-            <h2 class="my-auth-title">이미 만료된 링크입니다.</h2>
+            <h2 class="my-auth-title">회원가입이 완료되었습니다.</h2>
+            <a class="my-auth-link" href="main">홈페이지 바로가기</a>
         </div>
     </div>
 </body>

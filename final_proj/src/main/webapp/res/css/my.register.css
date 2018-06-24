@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 .my-register-term-hr {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
@@ -73,17 +71,9 @@ button.my-register-regbtn {
     font-size: 1.2em;
 }
 
-
-.my-register-info-row {
-    display: none;
-    height: 30px;
-    color: red;
-    text-align: center;
-}
-
 button.my-register-iddupchck, button.my-register-emaildupchck {
     padding: 0 10px 0 10px;
-    
+
     display: inline-block;
     border: none;
     border-left: 1px solid rgba(0, 0, 0, 0.12);
@@ -96,4 +86,40 @@ button.my-register-iddupchck, button.my-register-emaildupchck {
 
 #my-register-id, #my-register-email {
     padding: 0 90px 0 20px;
+}
+
+.my-register-info-row {
+    display: none;
+    height: 30px;
+    color: red;
+    text-align: center;
+}
+.my-register-dim{
+    background:rgba(0,0,0,0.8);
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+}
+.my-register-dim .my-register-popup{
+    background:#fff;
+    font-size:16px;
+    width:500px;
+    height:200px;
+    line-height:30px;
+    font-weight:bold;
+    position:absolute;
+    left:50%;
+    margin-left:-250px;
+    top:50%;
+    margin-top:-100px;
+}
+.my-register-dim .my-register-popup div{
+    width:500px;
+    height:200px;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
 }

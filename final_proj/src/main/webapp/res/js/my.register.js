@@ -246,6 +246,7 @@ function register_doRegister() {
     if (submit) {
 //    	register_encpw();
 //        $("#register-form").submit();
+        $(".my-register-dim").show();
         $.ajax({
             type: "POST",
             url: "register",

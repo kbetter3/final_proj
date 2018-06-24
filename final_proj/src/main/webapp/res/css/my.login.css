@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 .my-login-option-wrap {
     height: 20px;
     position: relative;
@@ -68,4 +66,9 @@
     text-align: center;
     color: red;
     margin-bottom: 20px;
+}
+.my-login-errormsg{
+    color:red;
+    margin:20px 0;
+    text-align:center;
 }

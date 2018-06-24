@@ -38,6 +38,16 @@
     padding-left: 12px;
     width: 100px;
 }
+#my-albummgmt-addbtn{
+    padding:10px;
+    margin:0 0 20px 20px;
+    background:rebeccapurple;
+    width:100px;
+    text-align:center;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
 
 #my-albummgmt-title-like {
     padding-left: 36px;
@@ -59,7 +69,7 @@
     background-color: inherit;
 }
 
-.my-albummgmt-artist-row {
+.my-albummgmt-album-row {
     height: 85px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }

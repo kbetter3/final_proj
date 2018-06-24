@@ -13,7 +13,7 @@
     font-size: 14px;
     width: 100%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 .my-submenu-menuitem-2 {
@@ -21,7 +21,7 @@
     font-size: 14px;
     width: 50%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 
@@ -30,7 +30,7 @@
     font-size: 14px;
     width: 33.33%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 .my-submenu-menuitem-4 {
@@ -38,7 +38,7 @@
     font-size: 14px;
     width: 25%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 .my-submenu-menuitem-5 {
@@ -46,7 +46,7 @@
     font-size: 14px;
     width: 20%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 .my-submenu-menuitem-7 {
@@ -54,22 +54,33 @@
     font-size: 14px;
     width: 14.28%;
     display: inline-block;
-    padding: 14px 0;
+    height:48px;
 }
 
 .my-submenu-container > li {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: white;
 }
 
 .my-submenu-menulink {
     cursor: pointer;
     font-weight: 500;
     text-decoration: none;
-    color: white;
+    padding:14px 0;
+    display:block;
+    border-right:1px solid rebeccapurple;
+    color: rebeccapurple;
+}
+
+.my-submenu-container > li:last-child .my-submenu-menulink{
+    border-right:none;
 }
 
 li.my-submenu-selected {
-    background-color: white;
+    background-color: rebeccapurple;
+}
+
+li.my-submenu-selected .my-submenu-menulink{
+    color:white;
 }
 
 span.my-submenu-selected {

@@ -234,6 +234,27 @@ public class MemberController {
 	@ResponseBody
 	@Transactional
 	public ResponseEntity<String> myInfo(HttpSession session) {		
+		JSONObject jobj = new JSONObject();
+		MemberDto memberDto = memberService.getById((String)session.getAttribute("uid")); 
+		
+//		jobj.put("id", memberDto.getId());
+//		jobj.put("email", memberDto.getEmail());
+//		jobj.put("power", memberDto.getPower());
+//		jobj.put("regdate", memberDto.getRegDate());
+//		jobj.put("voucher", memberDto.getExpireDate());
+//		jobj.put("downcount", memberDto.getDownCount());
+		jobj.put("member", memberDto.convertToJSON());
+		
+		jobj.put("state", RespState.DATA);
+		
+		return tagService.getEmptyResponse().body(jobj.toString());
+		
+	}
+	
+	
+	@PostMapping("/member/getpower")
+	@ResponseBody
+	public ResponseEntity<String> getPower(HttpSession session) {
 		int upower = (int)session.getAttribute("upower");
 		
 		JSONObject jobj = new JSONObject();
@@ -242,14 +263,9 @@ public class MemberController {
 			MemberDto memberDto = memberService.getById((String)session.getAttribute("uid")); 
 			session.setAttribute("upower", memberDto.getPower());
 			
-			jobj.put("id", memberDto.getId());
-			jobj.put("email", memberDto.getEmail());
-			jobj.put("power", memberDto.getPower());
-			jobj.put("regdate", memberDto.getRegDate());
-			jobj.put("voucher", memberDto.getExpireDate());
-			jobj.put("downcount", memberDto.getDownCount());
+//			jobj.put("member", memberDto.convertToJSON());
 			
-			jobj.put("state", RespState.DATA);
+			jobj.put("state", RespState.SUCCESS);
 			
 			return tagService.getEmptyResponse().body(jobj.toString());
 		} else {
